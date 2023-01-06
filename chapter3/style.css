@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.navbar {
+  flex: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(98, 116, 238);
+  padding: 1rem 0;
+}
+.compStyle {
+  background-color: lightgrey;
+}
+#logo {
+  cursor: pointer;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin-left: 2rem;
+}
+#search-bar {
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  width: 50%;
+  border-style: solid;
+}
+#user-icon {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 3rem;
+}
