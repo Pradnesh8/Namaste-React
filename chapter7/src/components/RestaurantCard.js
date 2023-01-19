@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CDN_IMG_URL } from "../config";
 
 // Object is props received from parent and destructuring it to get values

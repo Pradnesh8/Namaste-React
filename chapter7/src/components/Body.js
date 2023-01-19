@@ -1,6 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from './Shimmer';
+import { Link } from "react-router-dom";
+import { REST_API_URL } from './../config';
 
 function filterData(searchText, restaurants) {
     const filterData = restaurants.filter((restaurant) => {
@@ -34,7 +36,7 @@ const Body = () => {
 
     async function getRestaurants() {
         try {
-            const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0218215&lng=73.0907&page_type=DESKTOP_WEB_LISTING");
+            const data = await fetch(`${REST_API_URL}`);
             const json = await data.json();
             setRestaurantList(json.data.cards[2].data.data.cards);
             setFilteredRestList(json.data.cards[2].data.data.cards);
@@ -67,7 +69,9 @@ const Body = () => {
                                     return (
                                         // Key must be unique
                                         // ...rest.data - sends the data as props it spreads all values of rest object
-                                        <RestaurantCard {...rest.data} key={rest.data.id} />
+                                        <Link to={`/info/${rest.data.id}`} key={rest.data.id}>
+                                            <RestaurantCard {...rest.data} />
+                                        </Link>
                                     )
                                 })
                         }
