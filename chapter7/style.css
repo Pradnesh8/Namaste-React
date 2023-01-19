@@ -113,3 +113,68 @@ h4 {
   padding: 1rem 0 1rem 0;
   background-color: lightgray;
 }
+
+/* 
+Restauarant Details Page
+*/
+.restaurant-img {
+  flex: 0.8;
+  height: 75vh;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 1rem 1rem 1rem;
+}
+
+.restaurant-details {
+  display: flex;
+  margin-top: 6vh;
+  justify-content: space-around;
+}
+
+.restaurant-info-sect {
+  flex: 1;
+}
+
+.restaurant-details > .restaurant-info-sect > .restaurant-name {
+  font-size: 2rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.cost-and-rating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.cost-for-two {
+  margin-left: 2rem;
+}
+
+.icon {
+  height: 1rem;
+  width: auto;
+}
+.menu {
+  max-height: 56vh;
+  margin-bottom: 1rem;
+  overflow-y: auto;
+}
+.menu-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 0;
+}
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+}
+.menu-item .item-price {
+  padding-left: 1rem;
+}
