@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Contact from './components/Contact';
 import RestaurantDetails from './components/RestaurantDetails';
 import Error from './components/Error';
+import Login from './components/Login';
 // Coding Assignment:
 //  Add Shimmer Effect without installing a library
 //  Install react - router - dom
@@ -53,7 +54,11 @@ const appRouter = createBrowserRouter([
                 path: '/contact',
                 element: <Contact />
             }
-        ]
+        ],
+    },
+    {
+        path: '/login',
+        element: <Login />
     }
 ])
 const root = ReactDOM.createRoot(document.getElementById("root"));

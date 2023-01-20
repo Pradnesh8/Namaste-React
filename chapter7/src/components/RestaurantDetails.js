@@ -14,11 +14,15 @@ const RestaurantDetails = () => {
     useEffect(() => {
         getRestaurantInfo();
     }, [])
-    console.log(id)
+    // return null when data is not present
     if (!restData) {
-        return null
+        return null;
     }
     return (
+        // TODO : SEARCH box
+        // TODO : pages
+        // TODO : veg/nonveg icon
+        // TODO : sort by price/category
         <div className="restaurant-details">
             <img className="restaurant-img" src={CDN_IMG_URL + restData?.cloudinaryImageId} alt={restData?.name} />
             <div className="restaurant-info-sect">
