@@ -3,6 +3,7 @@ import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+    // console.log("useState(1)", useState(1));
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     useEffect(() => {
         const isLogin = localStorage.getItem("isLoggedIn");
