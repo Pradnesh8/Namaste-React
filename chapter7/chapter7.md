@@ -1,4 +1,4 @@
-#Chapter 6 : Exploring the world!
+#Chapter 7 : Finding the path!
 
 Coding Assignment:
  Add Shimmer Effect without installing a library
