@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.logo {
+  cursor: pointer;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin-left: 2rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: lightgrey;
+  padding: 0.5rem 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+.nav-links > .nav-item {
+  cursor: pointer;
+}
+
+.restaurant-list {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 5vh;
+  display: flex;
+  min-height: 64vh;
+}
+
+.restaurant-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 20vw;
+}
+
+.restaurant-card-loading {
+  height: 30vh;
+  width: 20vw;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+.restaurant-card img {
+  height: 40vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.restaurant-card h3,
+h4 {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.search-box {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2rem;
+}
+
+#search {
+  padding: 0.8rem;
+  width: 20vw;
+  border-radius: 0.4rem;
+  border: 1px solid lightgrey;
+  margin-right: 0.2rem;
+  font-size: 1rem;
+  font-family: "Rubik";
+}
+
+.search-btn {
+  font-size: 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid lightgray;
+  color: black;
+  font-family: "Rubik";
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+  margin: 1rem 0 0 0;
+  padding: 1rem 0 1rem 0;
+  background-color: lightgray;
+}
+
+/* 
+Restauarant Details Page
+*/
+.restaurant-img {
+  flex: 0.8;
+  height: 75vh;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 1rem 1rem 1rem;
+}
+
+.restaurant-details {
+  display: flex;
+  margin-top: 6vh;
+  justify-content: space-around;
+}
+
+.restaurant-info-sect {
+  flex: 1;
+}
+
+.restaurant-details > .restaurant-info-sect > .restaurant-name {
+  font-size: 2rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.cost-and-rating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.cost-for-two {
+  margin-left: 2rem;
+}
+
+.icon {
+  height: 1rem;
+  width: auto;
+}
+.menu {
+  max-height: 56vh;
+  margin-bottom: 1rem;
+  overflow-y: auto;
+}
+.menu-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 0;
+}
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+}
+.menu-item .item-price {
+  padding-left: 1rem;
+}
+
+/* Login form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.submit-form {
+  color: #000;
+  cursor: pointer;
+  border: 1px solid #d3d3d3;
+  border-radius: 0.4rem;
+  font-family: Rubik;
+  font-size: 1rem;
+  padding: 0.6rem;
+}
+.loginForm > input {
+  width: 20vw;
+  border: 1px solid #d3d3d3;
+  border-radius: 0.4rem;
+  margin-right: 0.2rem;
+  padding: 0.8rem;
+  font-family: Rubik;
+  font-size: 1rem;
+}
+.errMsg {
+  color: rgb(255, 116, 52);
+}
+
+/* About */
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
