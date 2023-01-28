@@ -3,7 +3,7 @@ import { REST_API_URL } from '../config';
 const useGetRestaurants = () => {
     const [restaurantList, setRestaurantList] = useState([]);
     const [filteredRestList, setFilteredRestList] = useState([]);
-
+    const [errMsg, setErrMsg] = useState("");
     async function getRestaurants() {
         try {
             const data = await fetch(`${REST_API_URL}`);
@@ -20,7 +20,7 @@ const useGetRestaurants = () => {
         getRestaurants();
     }, []);
 
-    return [restaurantList, setRestaurantList, filteredRestList, setFilteredRestList];
+    return [restaurantList, setRestaurantList, filteredRestList, setFilteredRestList, errMsg];
 
 }
 

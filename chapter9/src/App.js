@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import About from './components/About';
+const About = lazy(() => import('./components/About'));
+const Store = lazy(() => delayForDemo(import('./components/Store')));
+// import About from './components/About';
 import Body from './components/Body';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -9,16 +11,19 @@ import Contact from './components/Contact';
 import RestaurantDetails from './components/RestaurantDetails';
 import Error from './components/Error';
 import Login from './components/Login';
+import Shimmer from './components/Shimmer';
+
+// Add a fixed delay so you can see the loading state
+function delayForDemo(promise) {
+    return new Promise(resolve => {
+        setTimeout(resolve, 2000);
+    }).then(() => promise);
+}
+
 // Coding Assignment:
-//  Add Shimmer Effect without installing a library
-//  Install react - router - dom
-//  Create a appRouter and Provide it to the app
-//  Create a Home, About, Contact Page with Link(use child routes)
-//  Make a Error page for routing errors
-//  Create a Restaurant Page with dynamic restaurant ID
-//  (Extra) - Create a login Page using Formik Library
-
-
+// o Create your custom hooks
+// o Try out lazy and suspense
+// o Make your code clean
 
 const AppLayout = () => {
     return (
@@ -48,11 +53,25 @@ const appRouter = createBrowserRouter([
             },
             {
                 path: '/about',
-                element: <About />
+                element: (
+                    // The lazy loaded import (dynamic import) must be wrapped with Suspense
+                    // fallback is the UI code or the text needs to be shown while loading component
+                    <Suspense fallback={<h1>Loading ...</h1>}>
+                        <About />
+                    </Suspense>
+                )
             },
             {
                 path: '/contact',
                 element: <Contact />
+            },
+            {
+                path: '/store',
+                element: (
+                    <Suspense fallback={<Shimmer />}>
+                        <Store />
+                    </Suspense>
+                )
             }
         ],
     },

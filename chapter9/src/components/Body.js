@@ -2,18 +2,17 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from './Shimmer';
 import { Link } from "react-router-dom";
-import { REST_API_URL } from './../config';
 import { filterData } from '../utils/helper';
 import useGetRestaurants from "../utils/useGetRestaurants";
 
 
 const Body = () => {
-    // TODO : Clean the code
-    const [restaurantList, setRestaurantList] = useState([]);
-    const [filteredRestList, setFilteredRestList] = useState([]);
     const [searchText, setSearchText] = useState("");
-    const [errMsg, setErrMsg] = useState("");
-    const outputUseGetRestaurants = useGetRestaurants();
+
+    // Custom hook to call the API which get Restaurants
+    // Which helps make code look very clean and readable
+    // It returns the restaurantList, setRestaurantList, filteredRestList, setFilteredRestList, errMsg
+    const [restaurantList, setRestaurantList, filteredRestList, setFilteredRestList, errMsg] = useGetRestaurants();
 
     // COMPONENT RENDER HIERARCHY
     // RENDER -> NO DEPENDENCY ARRAY -> EMPTY DEPENDENCY -> SEARCH TEXT DEPENDENCY
@@ -22,32 +21,11 @@ const Body = () => {
     });
 
     useEffect(() => {
-        console.log("Empty dependency array");
-        getRestaurants();
-    }, []);
-
-    useEffect(() => {
         console.log("SearchText dep");
     }, [searchText]);
 
     console.log("RENDER");
 
-    async function getRestaurants() {
-        try {
-            const data = await fetch(`${REST_API_URL}`);
-            const json = await data.json();
-            setRestaurantList(json.data.cards[2].data.data.cards);
-            setFilteredRestList(json.data.cards[2].data.data.cards);
-        }
-        catch (error) {
-            setErrMsg(error.message);
-        }
-    }
-    // RETURN NULL WHEN API is fetching data
-    // if (filteredRestList.length === 0) {
-    //     return null
-    // }
-    console.log("data", outputUseGetRestaurants);
     return (
         errMsg ? <div>Something went wrong <br /> Please try after sometime</div> :
             (restaurantList.length === 0 && errMsg === "") ?
