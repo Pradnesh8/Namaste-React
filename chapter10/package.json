@@ -1,5 +1,5 @@
 {
-  "name": "chapter9",
+  "name": "chapter10",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,7 +19,9 @@
   },
   "devDependencies": {
     "parcel": "^2.8.2",
-    "process": "^0.11.10"
+    "postcss": "^8.4.21",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.2.4"
   },
   "browserlists": [
     "last 5 versions"
