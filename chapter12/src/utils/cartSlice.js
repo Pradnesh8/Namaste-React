@@ -7,22 +7,22 @@ const cartSlice = createSlice({
     },
     reducers: {
         addItem: (state, action) => {
-            // if (state.items.length > 0)
-            state.items.find(({ id }) => id === action.payload.id) ?
-                state.items = state.items.map(item => item.id === action.payload.id ? { ...item, count: item.count + 1 } : item)
-                : state.items.push({ ...action.payload, count: 1 });
-            // else state.items.push({ ...action.payload, count: 1 });
+            state.items.push({ ...action.payload, count: 1 });
+        },
+        incrementItem: (state, action) => {
+            state.items = state.items.map(item => item.id === action.payload.id ? { ...item, count: item.count + 1 } : item);
+        },
+        decrementItem: (state, action) => {
+            state.items = state.items.map(item => item.id === action.payload.id ? { ...item, count: item.count - 1 } : item);
         },
         removeItem: (state, action) => {
-            state.items.find(({ id, count }) => id === action.payload && count > 1) ?
-                state.items = state.items.map(item => item.id === action.payload ? { ...item, count: item.count - 1 } : item)
-                : state.items = state.items.filter((item) => item.id !== action.payload)
+            state.items = state.items.filter((item) => item.id !== action.payload);
         },
-        clearItem: (state) => {
+        clearCart: (state) => {
             state.items = [];
         }
     }
 })
 
-export const { addItem, removeItem, clearItem } = cartSlice.actions;
+export const { addItem, removeItem, incrementItem, decrementItem, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

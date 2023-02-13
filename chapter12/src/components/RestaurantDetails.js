@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { CDN_IMG_URL, REST_DATA_API_URL } from './../config';
 import starIcon from './../../assets/star-icon.png';
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../utils/cartSlice";
+import { addItem, incrementItem, decrementItem, removeItem } from "../utils/cartSlice";
 const RestaurantDetails = () => {
     const { id } = useParams();
     const [restData, setRestData] = useState();
@@ -23,8 +23,12 @@ const RestaurantDetails = () => {
         dispatch(addItem(item))
     }
 
+    const incrementCount = (item) => {
+        dispatch(incrementItem(item))
+    }
+
     const removeFromCart = (item) => {
-        dispatch(removeItem(item.id))
+        (cartItems.find(({ id }) => id === item.id).count > 1) ? dispatch(decrementItem(item)) : dispatch(removeItem(item.id))
     }
     // return null when data is not present
     if (!restData) {
@@ -35,7 +39,7 @@ const RestaurantDetails = () => {
         // TODO : pages
         // TODO : veg/nonveg icon
         // TODO : sort by price/category
-        <div className="flex items-start">
+        <div className="flex items-start mt-4">
             <img className="h-[85vh] w-auto ml-5 flex-1 object-cover" src={CDN_IMG_URL + restData?.cloudinaryImageId} alt={restData?.name} />
             <div className="ml-8 flex-1">
                 <div className="text-2xl font-medium">
@@ -75,7 +79,7 @@ const RestaurantDetails = () => {
                                                     </svg>
                                                 </span>
                                                 <span>{cartItems.find(({ id }) => id === menu_item.id).count}</span>
-                                                <span className="cursor-pointer" onClick={() => addToCart(menu_item)}>
+                                                <span className="cursor-pointer" onClick={() => incrementCount(menu_item)}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                                         <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clipRule="evenodd" />
                                                     </svg>
