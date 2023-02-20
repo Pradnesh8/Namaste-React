@@ -1,4 +1,4 @@
-#chapter 13 : Let's Build our Store
+#chapter 13 : Time for the test
 
 Coding Assignment:
  Setup React Testing Library
