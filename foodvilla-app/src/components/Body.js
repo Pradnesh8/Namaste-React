@@ -29,7 +29,7 @@ const Body = () => {
     return (
         errMsg ? <div>Something went wrong <br /> Please try after sometime</div> :
             (restaurantList.length === 0 && errMsg === "") ?
-                <Shimmer /> :
+                <Shimmer type={"restaurant-list"} /> :
                 <>
                     <div className="flex gap-2 justify-end m-8">
                         <input data-testid="search" className="border w-72 p-2 rounded-md" type="text" name="search" id="search" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
