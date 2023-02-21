@@ -19,7 +19,12 @@ const Header = () => {
         setCartItemCount(getcartItemCount);
     }, [cartItems])
     return (
-        <div className="flex px-6 justify-between items-center shadow-md">
+        /**
+         *  background: #A1FFCE;  
+         *  background: -webkit - linear - gradient(to right, #FAFFD1, #A1FFCE);  
+         *  background: linear - gradient(to right, #FAFFD1, #A1FFCE); 
+         */
+        <div className="flex px-6 justify-between items-center shadow-md bg-gradient-to-r from-[#A1FFCE] to-[#FAFFD1]">
             <Link to={"/"}><div className='font-logo text-5xl p-4' data-testid="logo">Foodvilla</div></Link>
             <ul className='flex gap-10'>
                 <Link to={"/"}><li className='nav-item'>Home</li></Link>
