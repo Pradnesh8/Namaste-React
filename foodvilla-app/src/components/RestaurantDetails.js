@@ -82,7 +82,7 @@ const RestaurantDetails = () => {
 
                     <div className="flex items-center gap-2 mb-2.5 font-medium">
                         <div className="flex items-center gap-1">
-                            <img src={starIcon} alt="star-icon" className="h-5" /> {restData?.avgRating} rating
+                            <img src={starIcon} alt="star-icon" className="h-5" /> {restData?.avgRating}
                         </div>
                         <div className="cost-for-two">
                             {restData?.costForTwoMsg}
@@ -92,7 +92,7 @@ const RestaurantDetails = () => {
             </div>
             {/* Restaurant Menu */}
             <div className="flex-[1.5] m-1">
-                <div className="flex items-center justify-between p-2" >
+                <div className="flex items-center justify-between p-4 border-b-2" >
                     <span className="text-2xl font-medium" data-testid="menu">
                         Menu
                     </span>
@@ -119,7 +119,7 @@ const RestaurantDetails = () => {
                     }
                     {filterMenueData?.map((menu_item) => {
                         return (
-                            <div className="flex justify-between my-2 items-center" key={menu_item.id}>
+                            <div className="flex justify-between gap-1 my-2 items-center" key={menu_item.id}>
                                 <div className="item-name flex items-center gap-2">
                                     {
                                         menu_item.isVeg ?
