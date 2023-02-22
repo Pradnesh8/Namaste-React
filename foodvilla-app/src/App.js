@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 const About = lazy(() => import('./components/About'));
 const Store = lazy(() => delayForDemo(import('./components/Store')));
+const Checkout = lazy(() => import('./components/Checkout'));
 // import About from './components/About';
 import Body from './components/Body';
 import Footer from './components/Footer';
@@ -32,8 +33,10 @@ function delayForDemo(promise) {
 const AppLayout = () => {
     return (
         <Provider store={store}>
-            <Header />
-            <Outlet />
+            <div className='min-h-screen'>
+                <Header />
+                <Outlet />
+            </div>
             <Footer />
         </Provider>
     )
@@ -81,6 +84,14 @@ const appRouter = createBrowserRouter([
                     </Suspense>
                 )
             },
+            {
+                path: '/checkout',
+                element: (
+                    <Suspense fallback={<Shimmer type="checkout" />}>
+                        <Checkout />
+                    </Suspense>
+                )
+            }
         ],
     },
     {
