@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeItem, incrementItem, decrementItem } from "../utils/cartSlice";
 import emptycart from '../../assets/emptycart.png';
 import { CDN_IMG_URL } from "../config";
+import { useNavigate, useMatch } from "react-router-dom";
 const Cart = () => {
+    const isCheckout = useMatch("/checkout");
     const cartItems = useSelector(store => store.cart.items);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const incrementCount = (item) => {
         dispatch(incrementItem(item))
     }
@@ -22,7 +24,7 @@ const Cart = () => {
 
     return (
         <div className="m-2">
-            <h1 className="text-3xl ml-3 font-bold" data-testid="cart">Cart</h1>
+            {!isCheckout && <h1 className="text-3xl ml-3 font-bold" data-testid="cart">Cart</h1>}
             {
                 cartItems.length > 0 ?
                     <>
@@ -30,7 +32,7 @@ const Cart = () => {
                             {
                                 cartItems.map((item) => {
                                     return (
-                                        <div key={item.id} data-testid="cart-item-card" className="flex gap-4 justify-between items-center my-2 shadow-md">
+                                        <div key={item.id} data-testid="cart-item-card" className="flex gap-4 justify-between items-center my-2 shadow-md bg-white">
                                             <div className="flex items-center">
                                                 <div className="h-fit relative">
                                                     {
@@ -72,11 +74,31 @@ const Cart = () => {
                             }
 
                         </div>
-                        <div className="h-32 flex flex-col justify-around items-end p-5 w-full my-2 shadow-md text-xl font-bold">
-                            <div>
-                                Total : ₹ {calculatePrice()}
+                        <div className="min-h-32 flex flex-col gap-2 justify-around items-end p-5 w-full my-2 shadow-md text-xl font-bold">
+                            <div className="flex">
+                                <span>Items total :&nbsp;</span>
+                                <span>
+                                    ₹ {calculatePrice()}
+                                </span>
                             </div>
-                            <button className="bg-green-400 px-6 py-2 rounded-md text-white">Proceed to checkout</button>
+                            {isCheckout &&
+                                <>
+                                    <div className="flex font-thin text-base text-gray-400">
+                                        <span>Govt Taxes & Other Charges :&nbsp;</span>
+                                        <span>₹ {Math.round(calculatePrice() * 0.05)}</span>
+                                    </div>
+                                    <div className="flex border-t-2">
+                                        <span>To Pay :&nbsp;</span>
+                                        <span>
+                                            ₹ {calculatePrice() + Math.round(calculatePrice() * 0.05)}
+                                        </span>
+                                    </div>
+                                </>
+                            }
+
+                            {
+                                !isCheckout && <button className="bg-green-400 px-6 py-2 rounded-md text-white" onClick={() => navigate('/checkout')}>Proceed to checkout</button>
+                            }
                         </div>
                     </> :
                     <div className="flex flex-col items-center min-h-[80vh]">
