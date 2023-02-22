@@ -38,7 +38,7 @@ const Body = () => {
                             setFilteredRestList(data);
                         }}>Search</button>
                     </div>
-                    <div className='flex flex-wrap justify-center gap-24 min-h-[68vh]' data-testid="restaurant-list">
+                    <div className='flex flex-wrap justify-center gap-24 min-h-[68vh] mb-8' data-testid="restaurant-list">
                         {
                             (filteredRestList.length === 0 && searchText) ? <h2 className="font-bold text-2xl">No restaurant found</h2> :
                                 filteredRestList?.map((rest) => {
