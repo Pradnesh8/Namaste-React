@@ -10,9 +10,9 @@ const RestaurantCard = ({
     avgRating
 }) => {
     return (
-        <div className="h-fit w-72 shadow-sm">
+        <div className="h-fit w-72 rounded-md shadow-sm hover:shadow-2xl">
             <img className="h-56 w-[100%] object-cover object-center" src={`${CDN_IMG_URL}${cloudinaryImageId}`} alt="restauarant image" />
-            <div className="px-1 pb-2">
+            <div className="px-1.5 pb-2.5">
                 <h2 className="text-xl font-medium pt-2 pl-1">{name}</h2>
                 <h3 className="pl-1 font-normal">{cuisines.join(", ")}</h3>
                 <div className="flex items-center gap-2">

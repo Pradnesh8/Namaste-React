@@ -23,7 +23,7 @@ const RestaurantMenuShimmer = () => {
             <div className="flex items-start w-full min-h-[90vh]">
                 <div className="flex-1 flex flex-col min-h-[87vh] justify-center items-center gap-3 bg-gray-200 animate-pulse m-2">
                 </div>
-                <div className="flex-[1.5] min-h-[87vh] flex flex-col">
+                <div className="flex-[1.5] min-h-[100vh] flex flex-col">
                     <div className="bg-gray-200 animate-pulse m-1 flex-[0.1]">
                     </div>
                     <div className="bg-gray-200 animate-pulse flex-[0.8]">
