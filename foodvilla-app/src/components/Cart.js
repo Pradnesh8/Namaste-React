@@ -39,7 +39,7 @@ const Cart = () => {
                                                         item?.cloudinaryImageId ?
                                                             <img className=" h-[5rem] w-[5rem] object-cover object-center" src={CDN_IMG_URL + item.cloudinaryImageId} alt="dish-image" />
                                                             :
-                                                            <div className="bg-gray-200 h-28 w-28"></div>
+                                                            <div className="bg-gray-200 h-[5rem] w-[5rem]"></div>
                                                     }
                                                     {
                                                         item.isVeg ?

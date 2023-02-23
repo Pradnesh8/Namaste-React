@@ -17,6 +17,7 @@ import userContext from './utils/userContext';
 import { Provider } from 'react-redux';
 import store from './utils/store';
 import Cart from './components/Cart';
+import Scrolltotop from './components/Scrolltotop';
 
 // Add a fixed delay so you can see the loading state
 function delayForDemo(promise) {
@@ -33,6 +34,7 @@ function delayForDemo(promise) {
 const AppLayout = () => {
     return (
         <Provider store={store}>
+            <Scrolltotop />
             <div className='min-h-screen'>
                 <Header />
                 <Outlet />
