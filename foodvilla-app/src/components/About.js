@@ -33,9 +33,13 @@ class About extends React.Component {
     render() {
         console.log("About render");
         return (
-            <div className='flex flex-col items-center text-center min-h-[90vh]'>
-                <h1>About us</h1>
-                <Profile {...this.state} />
+            <div className="m-2">
+                <h1 className="text-3xl ml-3 font-bold" data-testid="about-us">About us</h1>
+                <div className="about flex justify-around items-center">
+                    <div className='flex flex-col items-center text-center min-h-[90vh]'>
+                        <Profile {...this.state} />
+                    </div>
+                </div>
             </div>
         )
     }
