@@ -16,6 +16,18 @@ const RestaurantListShimmer = () => {
         </>
     )
 }
+const RestaurantNextListShimmer = () => {
+    return (
+        <div className="flex flex-wrap justify-center gap-24" data-testid="shimmer">
+            {
+                Array(16).fill("").map((elem, index) =>
+                    <div key={index} className="h-60 w-72 bg-gray-200 animate-pulse">
+                    </div>
+                )
+            }
+        </div>
+    )
+}
 
 const RestaurantMenuShimmer = () => {
     return (
@@ -42,6 +54,8 @@ const Shimmer = ({ type }) => {
                 return <RestaurantListShimmer />
             case "menu":
                 return <RestaurantMenuShimmer />
+            case "restaurant-next-list":
+                return <RestaurantNextListShimmer />
         }
     }
     return (
