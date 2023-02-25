@@ -37,8 +37,8 @@ class Profile extends React.Component {
         console.log("Profile render", this.state)
         return (
             <div className='profile'>
-                <h2>Profile</h2>
-                <img src={this.state.avatar} alt="avatar" />
+                <h2 className='font-semibold text-xl my-2'>Profile</h2>
+                <img src={this.state.avatar} alt="avatar" className='w-80 h-80' />
                 <div className="name">{this.state.name}</div>
                 <div className="bio">Bio : {this.state.bio}</div>
                 <div className="views">Views : {this.props?.data?.count}</div>
