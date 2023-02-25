@@ -1,9 +1,11 @@
 
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom"
 import { removeItem, incrementItem, decrementItem } from "../utils/cartSlice";
 import emptycart from '../../assets/emptycart.png';
 import { CDN_IMG_URL } from "../config";
 import { useNavigate, useMatch } from "react-router-dom";
+import { clearCart } from "../utils/cartSlice";
 const Cart = () => {
     const isCheckout = useMatch("/checkout");
     const cartItems = useSelector(store => store.cart.items);
@@ -17,14 +19,32 @@ const Cart = () => {
         (cartItems.find(({ id }) => id === item.id).count > 1) ? dispatch(decrementItem(item)) : dispatch(removeItem(item.id))
     }
 
+    const emptyCart = () => {
+        dispatch(clearCart())
+    }
+
     const calculatePrice = () => {
-        const price = cartItems.reduce((sum, item) => sum + item.count * (item.price / 100), 0)
+        const price = cartItems.reduce((sum, item) => sum + item.count * (item.price / 100), 0);
         return parseFloat(price.toFixed(2));
     }
 
     return (
         <div className="m-2">
-            {!isCheckout && <h1 className="text-3xl ml-3 font-bold" data-testid="cart">Cart</h1>}
+            {
+                !isCheckout &&
+                <div className="flex justify-between items-end">
+                    <h1 className="text-3xl ml-3 font-bold" data-testid="cart">Cart</h1>
+                    {
+                        cartItems.length > 0 &&
+                        <button className="mr-5 cursor-pointer text-red-600" onClick={emptyCart}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+                                <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                                <path fillRule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.133 2.845a.75.75 0 011.06 0l1.72 1.72 1.72-1.72a.75.75 0 111.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 11-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 11-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    }
+                </div>
+            }
             {
                 cartItems.length > 0 ?
                     <>
@@ -32,28 +52,35 @@ const Cart = () => {
                             {
                                 cartItems.map((item) => {
                                     return (
-                                        <div key={item.id} data-testid="cart-item-card" className="flex gap-4 justify-between items-center my-2 shadow-md bg-white">
-                                            <div className="flex items-center">
-                                                <div className="h-fit relative">
-                                                    {
-                                                        item?.cloudinaryImageId ?
-                                                            <img className=" h-[5rem] w-[5rem] object-cover object-center" src={CDN_IMG_URL + item.cloudinaryImageId} alt="dish-image" />
-                                                            :
-                                                            <div className="bg-gray-200 h-[5rem] w-[5rem]"></div>
-                                                    }
-                                                    {
-                                                        item.isVeg ?
-                                                            <span className="absolute top-1 right-1 h-4 w-4 border border-green-400 flex justify-center items-center">
-                                                                <span className="h-2 w-2 p-1 rounded-full bg-green-400"></span>
-                                                            </span> :
-                                                            <span className="absolute top-1 right-1 h-4 w-4 border border-red-400 flex justify-center items-center">
-                                                                <span className="h-2 w-2 p-1 rounded-full bg-red-400"></span>
-                                                            </span>
-                                                    }
 
+                                        <div key={item.id} data-testid="cart-item-card" className="flex gap-4 justify-between items-center my-2 shadow-md bg-white">
+                                            <Link to={`/info/${item.restId}`}>
+                                                <div className="flex items-center">
+                                                    <div className="h-fit relative">
+                                                        {
+                                                            item?.cloudinaryImageId ?
+                                                                <img className=" h-[5rem] w-[5rem] object-cover object-center" src={CDN_IMG_URL + item.cloudinaryImageId} alt="dish-image" />
+                                                                :
+                                                                <div className="bg-gray-200 h-[5rem] w-[5rem]"></div>
+                                                        }
+                                                        {
+                                                            item.isVeg ?
+                                                                <span className="absolute top-1 right-1 h-4 w-4 border border-green-400 flex justify-center items-center">
+                                                                    <span className="h-2 w-2 p-1 rounded-full bg-green-400"></span>
+                                                                </span> :
+                                                                <span className="absolute top-1 right-1 h-4 w-4 border border-red-400 flex justify-center items-center">
+                                                                    <span className="h-2 w-2 p-1 rounded-full bg-red-400"></span>
+                                                                </span>
+                                                        }
+
+                                                    </div>
+                                                    <div className="text-base font-semibold ml-1">
+                                                        <span>
+                                                            {item.name}
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div className="text-base font-semibold ml-1">{item.name}</div>
-                                            </div>
+                                            </Link>
                                             <div className="flex gap-1 pr-2">
                                                 <span className="pr-1">₹{item.price / 100}</span>
                                                 <span className="cursor-pointer" onClick={() => removeFromCart(item)}>
@@ -90,7 +117,7 @@ const Cart = () => {
                                     <div className="flex border-t-2">
                                         <span>To Pay :&nbsp;</span>
                                         <span>
-                                            ₹ {calculatePrice() + Math.round(calculatePrice() * 0.05)}
+                                            ₹ {(calculatePrice() + Math.round(calculatePrice() * 0.05)).toFixed(2)}
                                         </span>
                                     </div>
                                 </>
@@ -110,7 +137,7 @@ const Cart = () => {
 
 
             }
-        </div>
+        </div >
     )
 }
 
