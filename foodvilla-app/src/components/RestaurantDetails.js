@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CDN_IMG_URL, REST_DATA_API_URL } from '../config';
 import starIcon from './../../assets/star-icon.png';
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, incrementItem, decrementItem, removeItem } from "../utils/cartSlice";
 import Cart from "./Cart";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 const RestaurantDetails = () => {
-    const navigate = useNavigate();
     const { id } = useParams();
     const [restData, setRestData] = useState();
     const [menuData, setMenuData] = useState([]);
@@ -71,13 +71,13 @@ const RestaurantDetails = () => {
         <div className="flex items-start w-full min-h-[90vh]">
             {/* Restaurant preview */}
             <div className="flex-1 flex flex-col min-h-[87vh] justify-center items-center gap-3 bg-[#A1FFCE] m-2 relative">
-                <div className="absolute top-[2%] flex w-full justify-start pl-3" onClick={() => navigate(-1)}>
+                <Link to="/" className="absolute top-[2%] flex w-full justify-start pl-3">
                     <span className="border bg-[#FAFFD1] p-1.5 rounded-md flex gap-1 items-center cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                         <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z" clipRule="evenodd" />
                     </svg>
                         <span>back</span>
                     </span>
-                </div>
+                </Link>
                 <img className="h-72 w-auto p-1 object-cover rounded-md" src={CDN_IMG_URL + restData?.cloudinaryImageId} alt={restData?.name} />
                 <div className="flex flex-col items-center">
                     <div className="text-2xl font-medium">
@@ -138,9 +138,14 @@ const RestaurantDetails = () => {
                                                 <span className="h-2 w-2 p-1 rounded-full bg-red-400"></span>
                                             </span>
                                     }
-                                    <span>
-                                        {menu_item.name}
-                                    </span>
+                                    <div className="flex justify-start gap-1 items-center">
+                                        <span>
+                                            {menu_item.name}
+                                        </span>
+                                        {
+                                            menu_item.isBestSeller && <span className="font-light text-xs border px-[0.3rem] py-[0.1rem] rounded-full bg-[#FAFFD1]">Bestseller</span>
+                                        }
+                                    </div>
                                 </div>
                                 <div className="pr-4 flex gap-4 items-center">
                                     <span>
