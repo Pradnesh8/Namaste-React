@@ -23,7 +23,7 @@ const Body = () => {
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
                 console.log("VISIBLE");
-                setOffset(prevOffset => prevOffset + 30);
+                setOffset(prevOffset => prevOffset + 31);
             }
         })
         if (node) observer.current.observe(node)
@@ -32,7 +32,6 @@ const Body = () => {
         if (restaurantList.length > 0) {
             setLoading(true);
             const data = filterData(searchText, restaurantList);
-            console.log("NEW", data);
             setFilteredRestList(data);
             setLoading(false);
         }
@@ -53,7 +52,15 @@ const Body = () => {
     console.log("RENDER");
 
     return (
-        errMsg ? <div className="flex justify-center items-center font-bold text-2xl h-screen w-auto">Something went wrong <br /> Please try after sometime</div> :
+        errMsg && !loading ? (errMsg.includes("location") ?
+            <div className="flex justify-center text-center pt-72 font-bold text-2xl h-screen w-auto text-red-400" >
+                {errMsg}
+            </div> :
+            <div className="flex justify-center items-center font-bold text-2xl h-screen w-auto" >
+                Something went wrong < br />
+                Please try after sometime
+            </div>
+        ) :
             (restaurantList.length === 0 && errMsg === "") ?
                 <Shimmer type={"restaurant-list"} /> :
                 <>
