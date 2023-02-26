@@ -149,7 +149,7 @@ const RestaurantDetails = () => {
                                 </div>
                                 <div className="pr-4 flex gap-4 items-center">
                                     <span>
-                                        ₹{menu_item.price / 100}
+                                        ₹{menu_item.price === 0 ? menu_item.defaultPrice / 100 : menu_item.price / 100}
                                     </span>
 
                                     {
