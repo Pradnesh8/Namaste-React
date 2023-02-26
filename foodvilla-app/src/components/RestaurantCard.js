@@ -7,10 +7,12 @@ const RestaurantCard = ({
     cloudinaryImageId,
     cuisines,
     slaString,
-    avgRating
+    avgRating,
+    promoted
 }) => {
     return (
-        <div className="h-fit w-72 rounded-md shadow-sm hover:shadow-2xl hover:scale-110 transition duration-300 ease-in-out">
+        <div className="h-fit w-72 relative rounded-md shadow-sm hover:shadow-2xl hover:scale-110 transition duration-300 ease-in-out">
+            {promoted && <span className="bg-green-300 rounded-lg rounded-l-none font-bold p-2 text-xs absolute top-1 -left-1">PROMOTED</span>}
             <img className="h-56 w-[100%] object-cover object-center" src={`${CDN_IMG_URL}${cloudinaryImageId}`} alt="restauarant image" />
             <div className="px-1.5 pb-2.5">
                 <h2 className="text-xl font-medium pt-2 pl-1">{name}</h2>
