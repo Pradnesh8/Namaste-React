@@ -18,7 +18,7 @@ export const Login = () => {
     const [testCreds, setTestCreds] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const { user, setUser } = UserContext;
-    console.log("UserContext", UserContext);
+
     const navigate = useNavigate();
     const handleSubmit = (data, resetForm) => {
         const { email, password } = data;
@@ -53,7 +53,7 @@ export const Login = () => {
                 validationSchema={SignInSchema}
                 onSubmit={(values, { resetForm }) => {
                     // same shape as initial values
-                    console.log(values);
+
                     handleSubmit(values, resetForm);
                 }}
                 enableReinitialize
@@ -82,7 +82,6 @@ export const Login = () => {
                                 </div>
                             }
                         </Form>
-                        {console.log(errors)}
                     </>
                 )}
             </Formik>

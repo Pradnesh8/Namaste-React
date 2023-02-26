@@ -35,11 +35,11 @@ const useGetRestaurants = () => {
             const data = await fetch(`${REST_API_OFFSET_URL}${offset}`);
             const json = await data.json();
             if (offset >= json.data.totalSize) setHasMore(false)
-            console.log("old", restaurantList, [...json.data.cards.map(_d => _d.data)]);
+
             const formattedList = [...json.data.cards.map(_d => _d.data)]
             setRestaurantList(prevRestList => [...prevRestList, ...formattedList]);
             setFilteredRestList(prevRestList => [...prevRestList, ...formattedList]);
-            console.log("new", restaurantList, filteredRestList);
+
         }
         catch (error) {
             setErrMsg(error.message);
@@ -52,7 +52,7 @@ const useGetRestaurants = () => {
     }, []);
 
     useEffect(() => {
-        console.log("IN", offset)
+
         offset > 0 && getMoreRestaurants();
     }, [offset, hasMore]);
 

@@ -16,13 +16,13 @@ const Body = () => {
 
     const observer = useRef();
     const lastRestaurant = useCallback((node) => {
-        // console.log(node);
+        // 
         // if loading return
         if (loading) return
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
-                console.log("VISIBLE");
+
                 setOffset(prevOffset => prevOffset + 31);
             }
         })
@@ -40,7 +40,7 @@ const Body = () => {
     useEffect(() => {
         const i = setTimeout(() => {
             if (searchText?.length >= 0) {
-                console.log("Called an Search")
+
                 filterRestaurant();
                 window.scrollTo(0, 0);
             }
@@ -49,7 +49,7 @@ const Body = () => {
             clearInterval(i);
         }
     }, [searchText])
-    console.log("RENDER");
+
 
     return (
         errMsg && !loading ? (errMsg.includes("location") ?
@@ -82,7 +82,6 @@ const Body = () => {
                         </div>
                     </div>
                     <div className='flex flex-wrap justify-center gap-24 min-h-[68vh] mb-8' data-testid="restaurant-list">
-                        {console.log(filteredRestList)}
                         {
                             (filteredRestList.length === 0 && searchText) ? <h2 className="font-bold text-2xl">No restaurant found</h2> :
                                 filteredRestList?.map((rest, index) => {

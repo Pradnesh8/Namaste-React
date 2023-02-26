@@ -9,7 +9,7 @@ class Profile extends React.Component {
             avatar: "",
             bio: ""
         }
-        console.log("Profile constructor", this.props);
+
     }
 
     async componentDidMount() {
@@ -21,23 +21,22 @@ class Profile extends React.Component {
             bio: json.bio
         }, () => {
             // It prints correct state value as it is callback function which runs after setState is done.
-            console.log("Profile setState callback", this.state)
+
         });//setState() method is asynchronous so below line will print initialValues of this.state,
         // Under the covers React will batch multiple calls to setState() into a single state mutation, 
         // and then re-render the component a single time, rather than re-rendering for every state change.
-        console.log("Profile componentDidMount", this.state);
+
 
     }
 
     componentDidUpdate() {
-        console.log("Profile componentDidUpdate");
+
     }
 
     render() {
-        console.log("Profile render", this.state)
+
         return (
-            <div className='profile'>
-                <h2 className='font-semibold text-xl my-2'>Profile</h2>
+            <div className='profile flex-[40%] flex flex-col items-center font-semibold text-lg'>
                 <img src={this.state.avatar} alt="avatar" className='w-80 h-80' />
                 <div className="name">{this.state.name}</div>
                 <div className="bio">Bio : {this.state.bio}</div>
@@ -47,7 +46,7 @@ class Profile extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("Profile componentWillUnmount");
+
     }
 }
 
