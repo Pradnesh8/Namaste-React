@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
+import ProfileStore from './ProfileStore';
 class About extends React.Component {
     constructor(props) {
         // To initiate state
@@ -8,7 +9,7 @@ class About extends React.Component {
             name: "",
             data: { count: 0 }
         }
-        console.log("About Constructor");
+
     }
 
     componentDidMount() {
@@ -16,28 +17,29 @@ class About extends React.Component {
         this.setState({ name: "John Doe" }) //we can update state and view will re-render
         // this.setState({ data: { count: } })
         this.timer = setInterval(() => {
-            console.log("Interval running");//Unless we clear Interval it will keep running 
+
             this.setState(previousState => ({
                 data: { count: previousState.data.count + 1 }
             }));
         }, 1000);
-        console.log("About componentDidMount");
+
     }
 
     componentDidUpdate() {
         // Called when new props arrives, if any state changes or force update()
-        console.log("About componentDidUpdate")
+
     }
 
     // Class based component must have render method to work
     render() {
-        console.log("About render");
+
         return (
             <div className="m-2">
-                <h1 className="text-3xl ml-3 font-bold" data-testid="about-us">About us</h1>
-                <div className="about flex justify-around items-center">
-                    <div className='flex flex-col items-center text-center min-h-[90vh]'>
+                <h1 className="text-3xl ml-3 font-bold" data-testid="about-us">About</h1>
+                <div className="about flex justify-around items-center mt-10 mr-10">
+                    <div className='flex justify-between items-start text-center min-h-[90vh] w-full'>
                         <Profile {...this.state} />
+                        <ProfileStore />
                     </div>
                 </div>
             </div>
@@ -47,7 +49,7 @@ class About extends React.Component {
     componentWillUnmount() {
         // Called when Component is about to destroy or change in route
         clearInterval(this.timer);//Clears the interval started in componentDidmount 
-        console.log("About componentWillUnmount");
+
     }
 }
 export default About;
