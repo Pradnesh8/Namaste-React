@@ -13,7 +13,7 @@ const Contact = () => {
             setErrMsg("");
             setSuccessMsg("Thank you for your feedback. We will get back to you soon.")
             setTimeout(() => {
-                setSuccessMsg("")
+                setSuccessMsg("");
             }, 5000)
         }
     }
@@ -33,7 +33,7 @@ const Contact = () => {
                         </div>
                         <textarea className="w-full border p-2 rounded-md" name="feednack" id="feedback" rows="5" onChange={(e) => {
                             setFeedback(e.target.value)
-                        }}>
+                        }} value={feedback}>
                         </textarea>
                         <div className="w-full flex justify-end">
                             <button className=" bg-[#C8FFD0] p-2 rounded-md" onClick={sendFeedback}>Send feedback</button>
