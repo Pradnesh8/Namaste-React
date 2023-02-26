@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { CDN_IMG_URL } from "../config";
 import starIcon from "./../../assets/star-icon.png";
 // Object is props received from parent and destructuring it to get values

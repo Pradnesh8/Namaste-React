@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 const About = lazy(() => import('./components/About'));
@@ -33,14 +33,14 @@ function delayForDemo(promise) {
 
 const AppLayout = () => {
     return (
-        <Provider store={store}>
+        <>
             <Scrolltotop />
             <div className='min-h-screen'>
                 <Header />
                 <Outlet />
             </div>
             <Footer />
-        </Provider>
+        </>
     )
 }
 
@@ -106,9 +106,11 @@ const App = () => {
     const [user, setUser] = useState({});
     return (
         //Provider for userContext so that any component inside it can consume it
-        <userContext.Provider value={{ user, setUser }}>
-            <RouterProvider router={appRouter} />
-        </userContext.Provider>
+        <Provider store={store}>
+            <userContext.Provider value={{ user, setUser }}>
+                <RouterProvider router={appRouter} />
+            </userContext.Provider>
+        </Provider>
     )
 }
 const root = ReactDOM.createRoot(document.getElementById("root"));
