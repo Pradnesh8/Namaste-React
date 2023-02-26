@@ -10,16 +10,23 @@ const useGetRestaurants = () => {
     const [errMsg, setErrMsg] = useState("");
     async function getRestaurants() {
         setLoading(true);
-        try {
-            const data = await fetch(`${REST_API_URL}`);
-            const json = await data.json();
-            setResultsFound(json.data.cards[2].data?.data?.totalRestaurants)
-            setRestaurantList(json.data.cards[2].data.data.cards);
-            setFilteredRestList(json.data.cards[2].data.data.cards);
-        }
-        catch (error) {
-            setErrMsg(error.message);
-        }
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            try {
+                const data = await fetch(`${REST_API_URL}&lat=${position.coords.latitude}&lng=${position.coords.longitude}`);
+                const json = await data.json();
+                if (json.data) {
+                    setResultsFound(json.data.cards[2].data?.data?.totalRestaurants)
+                    setRestaurantList(json.data.cards[2].data?.data?.cards);
+                    setFilteredRestList(json.data.cards[2].data?.data?.cards);
+                    setErrMsg("");
+                }
+            } catch (e) {
+                setErrMsg(e.message);
+                setLoading(false)
+            }
+        }, (err) => {
+            setErrMsg("You have blocked Foodiewoodie from tracking your location. To use this app, change your location settings in browser.")
+        });
         setLoading(false);
     }
     async function getMoreRestaurants() {
