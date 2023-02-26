@@ -87,10 +87,10 @@ const Body = () => {
                             (filteredRestList.length === 0 && searchText) ? <h2 className="font-bold text-2xl">No restaurant found</h2> :
                                 filteredRestList?.map((rest, index) => {
                                     return (filteredRestList.length === index + 1 && (searchText?.length === 0)) ?
-                                        <Link ref={lastRestaurant} to={`/info/${rest.data.id}`} key={rest.data.id} >
+                                        <Link ref={lastRestaurant} to={`/info/${rest.data.id}`} key={rest.data.id + "_" + index} >
                                             <RestaurantCard {...rest.data} />
                                         </Link> :
-                                        <Link to={`/info/${rest.data.id}`} key={rest.data.id} >
+                                        <Link to={`/info/${rest.data.id}`} key={rest.data.id + "_" + index} >
                                             <RestaurantCard {...rest.data} />
                                         </Link>
                                 })
