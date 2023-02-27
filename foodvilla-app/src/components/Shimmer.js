@@ -32,7 +32,29 @@ const RestaurantNextListShimmer = () => {
 const RestaurantMenuShimmer = () => {
     return (
         <>
-            <div className="flex items-start w-full min-h-[90vh]">
+            <div className="flex items-start w-full min-h-[90vh] gap-2">
+                <div className="flex flex-col flex-[70%] w-full min-h-[87vh] gap-1">
+                    <div className="h-[30vh] bg-gray-200 animate-pulse"></div>
+                    <div className="h-[10vh] bg-gray-200 animate-pulse"></div>
+                    <div className="h-[60vh] flex flex-wrap justify-around">
+                        <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md bg-gray-200 animate-pulse">
+                        </div>
+                        <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md bg-gray-200 animate-pulse">
+                        </div>
+                        <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md bg-gray-200 animate-pulse">
+                        </div>
+                        <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md bg-gray-200 animate-pulse">
+                        </div>
+                        <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md bg-gray-200 animate-pulse">
+                        </div>
+                        <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md bg-gray-200 animate-pulse">
+                        </div>
+                    </div>
+                </div>
+                <div className="flex-[30%] min-h-[87vh] w-full bg-gray-200 animate-pulse">
+                </div>
+            </div>
+            {/* <div className="flex items-start w-full min-h-[90vh]">
                 <div className="flex-1 flex flex-col min-h-[87vh] justify-center items-center gap-3 bg-gray-200 animate-pulse m-2">
                 </div>
                 <div className="flex-[1.5] min-h-[100vh] flex flex-col">
@@ -43,7 +65,7 @@ const RestaurantMenuShimmer = () => {
                 </div>
                 <div className="sideCart flex-1 flex flex-col min-h-[87vh] justify-start items-center gap-3 m-2 bg-gray-200 animate-pulse">
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
