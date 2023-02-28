@@ -33,15 +33,22 @@ const ProfileStore = () => {
     const handleChangeSection = (section) => {
         visibleSection === section ? setVisibleSection("") : setVisibleSection(section);
     }
-    const mockText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit totam distinctio consectetur perferendis culpa quibusdam. Repudiandae veniam recusandae nulla neque nobis dolores tenetur, amet incidunt repellat nihil totam nemo praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit.Sit totam distinctio consectetur perferendis culpa quibusdam.Repudiandae veniam recusandae nulla neque nobis dolores tenetur, amet incidunt repellat nihil totam nemo praesentium."
     // In this component we are using concept of "Lifiting state up"
     // we are passing down state in Section (Child) component
     // we can see the value as well as change it from child by using toggleIsVisible
     return (
         <div className="h-fit w-full flex-[60%]">
-            <Section isVisible={visibleSection === 'About'} toggleIsVisible={handleChangeSection} header="About" description={mockText} />
-            <Section isVisible={visibleSection === 'Team'} toggleIsVisible={handleChangeSection} header="Team" description={mockText} />
-            <Section isVisible={visibleSection === 'Careers'} toggleIsVisible={handleChangeSection} header="Careers" description={mockText} />
+            <div className="text-lg font-medium text-justify text-gray-500 p-1">
+                Welcome to <span className="text-black">FoodieWoodie</span>, your go-to food delivery web application for delicious meals delivered straight to your doorstep.
+            </div>
+            <Section isVisible={visibleSection === 'About'} toggleIsVisible={handleChangeSection} header="About" description="At FoodieWoodie, we believe that food should be a celebration of life, and we're on a mission to bring that joy to your doorstep. Our team is passionate about food, and we're committed to delivering the best possible dining experience to our customers.
+            We take pride in our commitment to quality and customer satisfaction. Our website is user-friendly and easy to navigate, making it easy to place your order and track your delivery. We also offer flexible delivery options, so you can enjoy your meal on your own schedule.
+            We understand that food is not just nourishment for the body but a way to connect with friends and family, to celebrate, to relax, and to enjoy life's little moments. That's why we're dedicated to delivering the best possible dining experience to you." />
+            <Section isVisible={visibleSection === 'Team'} toggleIsVisible={handleChangeSection} header="Team" description={"Our team of chefs and delivery drivers work tirelessly to bring you the freshest and most flavorful meals possible. We carefully curate our menu to offer a wide range of cuisines, from classic comfort food to exotic international dishes. Whether you're craving pizza, sushi, or Indian cuisine, we've got you covered."} />
+            <Section isVisible={visibleSection === 'Careers'} toggleIsVisible={handleChangeSection} header="Careers" description={"Coming Soon ..."} />
+            <div className="text-lg font-medium text-justify text-gray-500 p-1 mt-1">
+                Thank you for choosing FoodieWoodie. We're excited to serve you and make your mealtime an experience to remember.
+            </div>
         </div>
     )
 }

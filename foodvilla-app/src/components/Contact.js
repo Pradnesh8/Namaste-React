@@ -23,6 +23,9 @@ const Contact = () => {
             <div className="contact flex justify-around items-center">
                 <img src={contactus} alt="contact-us" className="h-[76vh] flex-1 pl-20" />
                 <div className="contact-form flex-1">
+                    <div className="text-lg pr-4 mb-3 text-gray-500">
+                        We would love to hear from you! At <span className="text-black">FoodieWoodie</span>, we are committed to providing the best possible service to our customers. Whether you have a question, comment, or suggestion, we're here to help.
+                    </div>
                     <div className="flex flex-col gap-1">
                         <span className="text-xl">Please reach out to us at:</span>
                         <a href="mailto:Support@foodiewoodie.co"><span className="font-bold text-2xl">Support@foodiewoodie.co</span></a>
