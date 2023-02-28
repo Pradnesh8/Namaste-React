@@ -149,9 +149,9 @@ const RestaurantDetails = () => {
                         }
                         {filterMenueData?.map((menu_item) => {
                             return (
-                                <div className="flex justify-between m-2 gap-1 items-center w-[40%] border shadow-md " key={menu_item.id}>
+                                <div className="flex justify-between m-2 gap-1 items-center w-[44%] border shadow-md " key={menu_item.id}>
                                     <div className="item-name flex items-center gap-2">
-                                        <div className="h-fit relative">
+                                        <div className="h-fit relative w-[5vw]">
                                             {
                                                 menu_item?.cloudinaryImageId ?
                                                     <ImageRenderer item={menu_item} />
@@ -197,7 +197,7 @@ const RestaurantDetails = () => {
                                                     </div>
                                             }
                                         </div>
-                                        <div className="flex flex-col justify-start gap-1">
+                                        <div className="flex flex-col w-[18vw] justify-start gap-1">
                                             <span>
                                                 {menu_item.name}
                                             </span>
