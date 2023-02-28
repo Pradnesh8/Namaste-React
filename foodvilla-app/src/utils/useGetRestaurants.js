@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { REST_API_OFFSET_URL, REST_API_URL } from '../config';
+import { REST_API_OFFSET_URL, REST_API_SEARCH_URL, REST_API_URL } from '../config';
 const useGetRestaurants = () => {
     const [restaurantList, setRestaurantList] = useState([]);
     const [filteredRestList, setFilteredRestList] = useState([]);
     const [offset, setOffset] = useState(0);
+    const [geolocation, setGeolocation] = useState({});
     const [resultsFound, setResultsFound] = useState(0);
     const [loading, setLoading] = useState(true);
     const [hasMore, setHasMore] = useState(true);
@@ -12,6 +13,7 @@ const useGetRestaurants = () => {
         setLoading(true);
         navigator.geolocation.getCurrentPosition(async (position) => {
             try {
+                setGeolocation({ latitude: position.coords.latitude, longitude: position.coords.longitude });
                 const data = await fetch(`${REST_API_URL}&lat=${position.coords.latitude}&lng=${position.coords.longitude}`);
                 const json = await data.json();
                 if (json.data) {
@@ -32,7 +34,7 @@ const useGetRestaurants = () => {
     async function getMoreRestaurants() {
         setLoading(true);
         try {
-            const data = await fetch(`${REST_API_OFFSET_URL}${offset}`);
+            const data = await fetch(`${REST_API_OFFSET_URL}&lat=${geolocation.latitude}&lng=${geolocation.longitude}&offset=${offset}`);
             const json = await data.json();
             if (offset >= json.data.totalSize) setHasMore(false)
 
@@ -52,12 +54,10 @@ const useGetRestaurants = () => {
     }, []);
 
     useEffect(() => {
-
         offset > 0 && getMoreRestaurants();
     }, [offset, hasMore]);
 
     return [resultsFound, restaurantList, setRestaurantList, filteredRestList, setFilteredRestList, errMsg, setOffset, loading, setLoading, hasMore];
-
 }
 
 export default useGetRestaurants;
