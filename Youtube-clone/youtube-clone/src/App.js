@@ -1,9 +1,12 @@
+import { useContext, useState } from 'react';
 import './App.css';
 import Body from './components/Body';
 import Navbar from './components/Navbar';
 import Sidenav from './components/Sidenav';
-
+import AppContext from './utils/AppContext';
 function App() {
+  const appContext = useContext(AppContext);
+  const [theme, setTheme] = useState(appContext.theme);
   /**
    * Navbar
    *    SideNavIcon
@@ -45,13 +48,16 @@ function App() {
    * */
 
   return (
-    <div className='flex flex-col'>
-      <Navbar />
-      <div className='flex'>
-        <Sidenav />
-        <Body />
+    // For toggling theme => theme state
+    <AppContext.Provider value={{ theme: theme, setTheme: setTheme }}>
+      <div className='flex flex-col'>
+        <Navbar />
+        <div className='flex'>
+          <Sidenav />
+          <Body />
+        </div>
       </div>
-    </div>
+    </AppContext.Provider>
   );
 }
 
