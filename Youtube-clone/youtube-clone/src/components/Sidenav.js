@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useSelector } from 'react-redux';
+import AppContext from '../utils/AppContext';
 
 const Sidenav = () => {
+    const sideNav = useSelector(store => store.app.sideNav);
+    console.log("sideNav", sideNav);
+    // For toggling theme
+    const appContext = useContext(AppContext);
+    console.log("appcontext", appContext);
+    if (!sideNav) return null;
     return (
-        <section className='sidenav flex flex-col pt-3 gap-3 max-h-[92vh] overflow-y-auto scrollbar'>
+        <section className='sidenav flex flex-col pt-3 gap-3 max-h-[92vh] overflow-y-hidden hover:overflow-y-auto hover:scrollbar'>
             <div className='sub-section flex flex-col gap-1 border pb-3 border-b-gray-300 border-x-0 border-t-0'>
                 <div className='flex items-center gap-5 p-2 mx-3 cursor-pointer hover:bg-gray-100 hover:rounded-xl'>
                     <span className='icon'>
