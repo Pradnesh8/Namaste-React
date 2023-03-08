@@ -1,11 +1,18 @@
 import React from 'react'
 import logo from '../assets/ytb-logo.png';
 import profilePhoto from '../assets/profile.jpg';
+import { useDispatch } from 'react-redux';
+import { toggleSideNav } from '../utils/appSlice'
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const toggleNav = () => {
+        console.log("Toggle")
+        dispatch(toggleSideNav());
+    }
     return (
         <section className='navbar flex justify-between items-center'>
             <div className='logo-brand flex justify-start items-center gap-5 ml-4'>
-                <span className='hamburger cursor-pointer p-2 hover:bg-gray-100 hover:rounded-full'>
+                <span className='hamburger cursor-pointer p-2 hover:bg-gray-100 hover:rounded-full' onClick={toggleNav}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
                         <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
                     </svg>
