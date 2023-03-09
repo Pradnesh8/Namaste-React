@@ -2,24 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 @layer utilities {
-  .scrollbar::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
 
-  .scrollbar::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     border-radius: 100vh;
     background: #f7f4ed;
     margin-top: 10px;
   }
 
-  .scrollbar::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background: lightgray;
     border-radius: 100vh;
     border: 1px solid lightgray;
   }
 
-  .scrollbar::-webkit-scrollbar-thumb:hover {
+  ::-webkit-scrollbar-thumb:hover {
     cursor: pointer;
     background: rgb(151, 149, 149);
   }
