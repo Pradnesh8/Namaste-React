@@ -10,11 +10,11 @@ const Sidenav = () => {
     console.log("appcontext", appContext);
     if (!sideNav) return null;
     return (
-        <section className='sidenav flex flex-col pt-3 gap-3 max-h-[92vh] overflow-y-hidden hover:overflow-y-auto hover:scrollbar'>
+        <section className='sidenav flex-[1] sticky top-12 mt-12 text-sm px-1 flex flex-col pt-3 gap-3 max-h-[92vh] overflow-y-hidden hover:overflow-y-auto hover:scrollbar'>
             <div className='sub-section flex flex-col gap-1 border pb-3 border-b-gray-300 border-x-0 border-t-0'>
-                <div className='flex items-center gap-5 p-2 mx-3 cursor-pointer hover:bg-gray-100 hover:rounded-xl'>
+                <div className='flex items-center gap-5 p-2 mx-3 cursor-pointer bg-gray-100 rounded-xl'>
                     <span className='icon'>
-                        <svg
+                        {/* <svg
                             className="w-6 h-6"
                             display="block"
                             pointerEvents="none"
@@ -26,14 +26,24 @@ const Sidenav = () => {
                                     className="style-scope yt-icon"
                                 ></path>
                             </g>
+                        </svg> */}
+
+
+                        {/* Home filled */}
+                        <svg
+                            className="w-6 h-6"
+                            display="block"
+                            pointerEvents="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <g className="style-scope yt-icon">
+                                <path
+                                    d="M4 10v11h6v-6h4v6h6V10l-8-7z"
+                                    className="style-scope yt-icon"
+                                ></path>
+                            </g>
                         </svg>
 
-                        {/* 
-                        Home filled
-                        <svg width="18" height="22" className='w-6 h-6' viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 9.5V22H12V14H6V22H0V9.5L9 0L18 9.5Z" fill="black" />
-                        </svg> 
-                        */}
                     </span>
                     <span className='nav-item'>
                         Home
