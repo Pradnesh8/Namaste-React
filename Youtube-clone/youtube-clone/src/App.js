@@ -50,12 +50,12 @@ function App() {
   return (
     // For toggling theme => theme state
     <AppContext.Provider value={{ theme: theme, setTheme: setTheme }}>
-      <div className='flex flex-col'>
-        <Navbar />
+      <div className='flex flex-col relative'>
         <div className='flex'>
           <Sidenav />
           <Body />
         </div>
+        <Navbar />
       </div>
     </AppContext.Provider>
   );
