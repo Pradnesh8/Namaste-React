@@ -23,4 +23,11 @@
     cursor: pointer;
     background: rgb(151, 149, 149);
   }
+  .hide-overflow {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 }
