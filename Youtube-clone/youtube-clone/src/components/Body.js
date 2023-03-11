@@ -4,7 +4,7 @@ import VideoContainer from './VideoContainer';
 
 const Body = () => {
     return (
-        <div className='mx-3 mt-12  flex-[6]'>
+        <div className='mx-3 mt-12 flex-[6]'>
             <TabBar />
             <VideoContainer />
         </div>
