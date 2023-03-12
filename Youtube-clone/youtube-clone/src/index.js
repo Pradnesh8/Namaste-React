@@ -5,12 +5,33 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Store from './utils/Store';
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Body from './components/Body';
+import SearchResult from './components/SearchResult';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Body />
+      },
+      {
+        path: "/results",
+        element: <SearchResult />
+      }
+    ]
+  }
+])
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={Store}>
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
