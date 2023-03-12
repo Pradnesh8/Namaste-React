@@ -16,7 +16,8 @@ const VideoCard = ({ info }) => {
     }, [])
     return (
         <div className='flex flex-col min-w-fit h-auto gap-1 cursor-pointer'>
-            <img src={thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.default?.url} alt="thumbnail" className='w-96 rounded-lg' />
+            {console.log("thumbnails", JSON.stringify(thumbnails))}
+            <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-96 rounded-lg' />
             <div className='flex justify-start mt-1 items-start w-96 px-1'>
                 <img src={channelImg} alt="channel-image" className='w-8 h-8 mt-1 mr-3 rounded-full' />
                 <div className='flex flex-col gap-[1px]'>
