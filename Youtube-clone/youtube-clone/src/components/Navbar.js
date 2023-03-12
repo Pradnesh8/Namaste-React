@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import logo from '../assets/ytb-logo.png';
 import profilePhoto from '../assets/profile.jpg';
-import { useDispatch } from 'react-redux';
-import { searchVideo, toggleSideNav } from '../utils/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSideNav } from '../utils/appSlice';
 import { GOOGLE_SEARCH_API } from '../utils/config'
+import { updateSearchCache } from '../utils/searchSlice';
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
     const [queryResults, setQueryResults] = useState([]);
     const [showQuery, setShowQuery] = useState(false);
+    const searchCache = useSelector(store => store.search.searchCache);
     const dispatch = useDispatch();
     const toggleNav = () => {
         console.log("Toggle")
         dispatch(toggleSideNav());
     }
 
-    const searchByQuery = (query_str) => {
-        console.log("called");
-        dispatch(searchVideo(query_str));
-    }
 
     const searchQueryItems = async () => {
-        const data = await fetch(GOOGLE_SEARCH_API + searchQuery);
-        const json = await data.json();
-        console.log("search result", json);
-        setQueryResults(json[1]);
+        if (searchCache[searchQuery]) {
+            console.log("from cache");
+            setQueryResults(searchCache[searchQuery]);
+        } else {
+            const data = await fetch(GOOGLE_SEARCH_API + searchQuery);
+            const json = await data.json();
+            console.log("search result", json);
+            dispatch(updateSearchCache(json));
+            setQueryResults(json[1]);
+        }
     }
 
     useEffect(() => {
         const t = setTimeout(() => {
             searchQueryItems();
-        }, 500);
+        }, 300);
         return () => {
             clearTimeout(t);
         }
@@ -42,7 +48,7 @@ const Navbar = () => {
                         <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
                     </svg>
                 </span>
-                <img src={logo} alt="YouTube logo" className='w-24 h-auto' />
+                <img src={logo} alt="YouTube logo" className='w-24 h-auto cursor-pointer' onClick={() => navigate("/")} />
             </div>
             <div className='search-bar flex flex-wrap justify-center items-center relative'>
                 <span className='text-box'>
@@ -62,7 +68,10 @@ const Navbar = () => {
                     <div className="search-suggestions w-[35vw] absolute top-[50px] left-0 z-20 py-3  flex flex-col bg-white shadow-2xl rounded-2xl">
                         {
                             queryResults.map((item) => {
-                                return <div key={crypto.randomUUID()} className='px-4 py-2 hover:bg-gray-200 cursor-pointer flex gap-4 items-center' onClick={() => searchByQuery(item)}>
+                                return <div key={crypto.randomUUID()} className='px-4 py-2 hover:bg-gray-200 cursor-pointer flex gap-4 items-center' onClick={() => {
+                                    setSearchQuery(item);
+                                    navigate("/results?search_query=" + item)
+                                }}>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
