@@ -35,7 +35,8 @@ const VideoItemCard = ({ info, content }) => {
                 <div style={{
                     WebkitLineClamp: 1,
                     overflowX: "hidden"
-                }}>
+                }}
+                    className="text-sm text-gray-700">
                     {description}
                 </div>
             </div>
