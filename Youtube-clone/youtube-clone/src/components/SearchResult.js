@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import { YOUTUBE_CHANNEL_IMG_API, YOUTUBE_VIDEO_LIST_SEARCH_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API } from '../utils/config';
 import { convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
+import Shimmer from './Shimmer';
 
 const VideoItemCard = ({ info, content }) => {
-    const { statistics, contentDetails } = content;
+
+    const { statistics } = content ? content : {};
     const { snippet } = info;
     const { title, channelTitle, thumbnails, channelId, publishedAt, description } = snippet;
     const [channelImg, setChannelImg] = useState("");
@@ -68,8 +70,11 @@ const SearchResult = () => {
     }, [searchQuery]);
 
     console.log("search", searchQuery);
+    if (videoList.length === 0) {
+        return <Shimmer id={"searchPage"} />
+    }
     return (
-        <div className='mx-20 mt-24 flex-[6] flex flex-col gap-5'>
+        <div className='mx-20 mt-24 mb-8 flex-[6] flex flex-col gap-5'>
             {videoList.map((video, index) => {
                 return <VideoItemCard key={video?.id?.videoId} info={video} content={videoContentList[index]} />
             })}

@@ -13,7 +13,7 @@ const VideoContainer = () => {
     useEffect(() => {
         fetchVideos()
     }, [])
-    if (videos.length === 0) return <Shimmer />;
+    if (videos.length === 0) return <Shimmer id={"homePage"} />;
     return (
         <div className='mt-8 p-8 w-full flex flex-wrap justify-around gap-4'>
             {
