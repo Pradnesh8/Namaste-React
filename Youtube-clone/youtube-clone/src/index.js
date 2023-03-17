@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Body from './components/Body';
 import SearchResult from './components/SearchResult';
 import ErrorPage from './components/ErrorPage';
+import WatchPage from './components/WatchPage';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/results",
         element: <SearchResult />
+      },
+      {
+        path: "/watch",
+        element: <WatchPage />
       }
     ]
   }
