@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { YOUTUBE_CHANNEL_IMG_API, YOUTUBE_VIDEO_LIST_SEARCH_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API } from '../utils/config';
 import { convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import Shimmer from './Shimmer';
@@ -76,7 +76,9 @@ const SearchResult = () => {
     return (
         <div className='mx-20 mt-24 mb-8 flex-[6] flex flex-col gap-5'>
             {videoList.map((video, index) => {
-                return <VideoItemCard key={video?.id?.videoId} info={video} content={videoContentList[index]} />
+                return <Link key={video?.id?.videoId} to={"/watch?v=" + video?.id?.videoId}>
+                    <VideoItemCard info={video} content={videoContentList[index]} />
+                </Link>
             })}
         </div>
     )

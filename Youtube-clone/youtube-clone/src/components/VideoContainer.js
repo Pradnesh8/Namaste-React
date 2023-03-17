@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { YOUTUBE_VIDEOS_API } from '../utils/config'
 import Shimmer from './Shimmer'
 import VideoCard from './VideoCard'
@@ -18,10 +19,12 @@ const VideoContainer = () => {
         <div className='mt-8 p-8 w-full flex flex-wrap justify-around gap-4'>
             {
                 videos.map((video) =>
-                    <VideoCard key={video.id} info={video} />
+                    <Link key={video.id} to={"watch?v=" + video.id}>
+                        <VideoCard info={video} />
+                    </Link>
                 )
             }
-        </div>
+        </div >
     )
 }
 
