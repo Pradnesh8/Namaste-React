@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom';
-import { YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API, YOUTUBE_VIDEO_SUGGESTIONS_API } from '../utils/config';
+import { YOUTUBE_VIDEO_DETAIL_BY_ID_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API, YOUTUBE_VIDEO_SUGGESTIONS_API } from '../utils/config';
 import { convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import { closeSideNav } from '../utils/appSlice';
+import Comments from './Comments';
+import VideoDetail from './VideoDetail';
 
 
 const SuggestionVideoCard = ({ info, content }) => {
@@ -35,7 +37,16 @@ const WatchPage = () => {
     const [searchParams] = useSearchParams();
     const [suggestions, setSuggestions] = useState([]);
     const [videoContentList, setVideoContentList] = useState([]);
+    const [videoDetails, setVideoDetails] = useState({});
     const dispatch = useDispatch();
+
+    const getVideoDetails = async () => {
+        const data = await fetch(YOUTUBE_VIDEO_DETAIL_BY_ID_API + searchParams.get("v"));
+        const json = await data.json();
+        console.log("jsondata", json);
+        setVideoDetails(json.items[0]);
+    }
+
     const fetchSuggestions = async () => {
         const data = await fetch(YOUTUBE_VIDEO_SUGGESTIONS_API + searchParams.get("v"));
         const json = await data.json();
@@ -50,11 +61,12 @@ const WatchPage = () => {
     }
     useEffect(() => {
         dispatch(closeSideNav());
+        getVideoDetails();
         fetchSuggestions();
     }, [])
     return (
-        <div className='mx-24 mt-20 flex-[6] flex gap-3'>
-            <div className='flex-[70%]'>
+        <div className='mx-24 mt-20 flex-[6] flex gap-6'>
+            <div className='flex-[70%] flex-col'>
                 <iframe
                     className='w-full h-[74vh]'
                     src={"https://www.youtube.com/embed/" + searchParams.get("v") + "?autoplay=1"}
@@ -62,8 +74,17 @@ const WatchPage = () => {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
-                    autoplay="1"
+                    autoPlay="1"
                 ></iframe>
+                {
+                    Object.keys(videoDetails).length > 0 &&
+                    (
+                        <>
+                            <VideoDetail info={videoDetails} />
+                            <Comments views={videoDetails?.statistics?.commentCount} />
+                        </>
+                    )
+                }
             </div>
             <div className='flex-[30%]'>
                 <div className='w-full flex flex-col gap-4'>
@@ -76,7 +97,7 @@ const WatchPage = () => {
                     }
                 </div >
             </div>
-        </div>
+        </div >
     )
 }
 
