@@ -16,7 +16,7 @@ const VideoContainer = () => {
     }, [])
     if (videos.length === 0) return <Shimmer id={"homePage"} />;
     return (
-        <div className='mt-8 p-8 w-full flex flex-wrap justify-around gap-4'>
+        <div className='mt-8 p-8 w-full flex flex-wrap justify-around overflow-x-hidden gap-4'>
             {
                 videos.map((video) =>
                     <Link key={video.id} to={"watch?v=" + video.id}>
