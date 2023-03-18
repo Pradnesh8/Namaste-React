@@ -55,7 +55,6 @@ const SearchResult = () => {
     const fetchVideosBySearch = async () => {
         const data = await fetch(YOUTUBE_VIDEO_LIST_SEARCH_API + searchQuery);
         const json = await data.json();
-        console.log("VIDEOS", json.items);
         const videoIds = []
         json.items.forEach((item) => {
             videoIds.push(item.id.videoId);
@@ -69,7 +68,6 @@ const SearchResult = () => {
         fetchVideosBySearch()
     }, [searchQuery]);
 
-    console.log("search", searchQuery);
     if (videoList.length === 0) {
         return <Shimmer id={"searchPage"} />
     }
