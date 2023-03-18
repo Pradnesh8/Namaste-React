@@ -38,3 +38,18 @@ export const getTimeDifference = (inputDate) => {
         return `1 day ago`
     }
 }
+
+export const formattedDate = (dateTime) => {
+    const date = new Date(dateTime);
+
+    // subtract one day from the date
+    date.setDate(date.getDate() - 1);
+
+    // format the date string into "MMM DD, YYYY" format
+    const formattedDate = date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+    return formattedDate;
+}
