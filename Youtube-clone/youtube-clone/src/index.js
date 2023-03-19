@@ -10,6 +10,7 @@ import Body from './components/Body';
 import SearchResult from './components/SearchResult';
 import ErrorPage from './components/ErrorPage';
 import WatchPage from './components/WatchPage';
+import WatchLivePage from './components/WatchLivePage';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/watch",
         element: <WatchPage />
+      },
+      {
+        path: "/watchlive",
+        element: <WatchLivePage />
       }
     ]
   }
