@@ -3,7 +3,7 @@ import { YOUTUBE_CHANNEL_IMG_API } from '../utils/config';
 import { convertToInternationalCurrencySystem, formattedDate } from '../utils/helper';
 
 const VideoDetail = ({ info }) => {
-    console.log(":", info);
+    const [showMore, setShowMore] = useState(false);
     const { snippet, statistics } = info;
     const { title, channelTitle, thumbnails, channelId, publishedAt, description } = snippet;
     const [channelImg, setChannelImg] = useState("");
@@ -86,8 +86,11 @@ const VideoDetail = ({ info }) => {
                     <span className='mr-3'>{convertToInternationalCurrencySystem(statistics?.viewCount)} views</span>
                     <span>{formattedDate(publishedAt)}</span>
                 </div>
-                <div className="description hide-overflow text-sm">
-                    {description}
+                <div className={"description text-sm flex flex-col gap-1"}>
+                    <div className={!showMore && "hide-overflow"}>
+                        {description}
+                    </div>
+                    <div className='font-semibold cursor-pointer' onClick={() => { setShowMore(!showMore) }}>Show {!showMore ? "more" : "less"}</div>
                 </div>
             </div>
         </div>
