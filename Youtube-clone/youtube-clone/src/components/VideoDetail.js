@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { YOUTUBE_CHANNEL_IMG_API } from '../utils/config';
+import { YOUTUBE_CHANNEL_IMG_API, YOUTUBE_CHANNEL_SUBSCRIBERS_COUNT } from '../utils/config';
 import { convertToInternationalCurrencySystem, formattedDate } from '../utils/helper';
 
 const VideoDetail = ({ info }) => {
     const [showMore, setShowMore] = useState(false);
+    const [channelSubInfo, setChannelSubInfo] = useState({});
     const { snippet, statistics } = info;
     const { title, channelTitle, thumbnails, channelId, publishedAt, description } = snippet;
     const [channelImg, setChannelImg] = useState("");
@@ -12,9 +13,19 @@ const VideoDetail = ({ info }) => {
         const json = await data.json();
         setChannelImg(json?.items[0]?.snippet?.thumbnails?.default?.url)
     }
+    const getChannelSubs = async () => {
+        const data = await fetch(YOUTUBE_CHANNEL_SUBSCRIBERS_COUNT + channelId);
+        const json = await data.json();
+        setChannelSubInfo({
+            hiddenSubscriberCount: json?.items[0]?.statistics?.hiddenSubscriberCount,
+            subscriberCount: convertToInternationalCurrencySystem(json?.items[0]?.statistics?.subscriberCount),
+        });
+    }
+
     useEffect(() => {
         getChannelImg();
-    }, []);
+        getChannelSubs();
+    }, [info]);
     return (
         <div className='mt-3 flex flex-col gap-3 info-box'>
             <div className="title font-medium text-xl">{title}</div>
@@ -23,7 +34,9 @@ const VideoDetail = ({ info }) => {
                     <img src={channelImg} alt="Channel Picture" className='w-10 h-10 rounded-full' />
                     <div className="channel-stats flex flex-col justify-between ml-2">
                         <span className='channel-name font-medium'>{channelTitle}</span>
-                        <span className='subscribers text-xs text-gray-600'> 13.4M subscribers</span>
+                        {
+                            !channelSubInfo?.hiddenSubscriberCount && <span className='subscribers text-xs text-gray-600'> {channelSubInfo?.subscriberCount} subscribers</span>
+                        }
                     </div>
                     <button className='bg-black font-semibold text-base rounded-full text-white px-3 h-8 ml-4'>Subscribe</button>
                 </div>

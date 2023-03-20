@@ -9,3 +9,4 @@ export const YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API = "https://www.googleapis.com
 export const YOUTUBE_VIDEO_SUGGESTIONS_API = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&type=video&key=" + GOOGLE_API_KEY + "&relatedToVideoId="
 export const YOUTUBE_VIDEO_DETAIL_BY_ID_API = "https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics,snippet&key=" + GOOGLE_API_KEY + "&id="
 export const OFFSET_LIVE_MESSAGE_COUNT = 30
+export const YOUTUBE_CHANNEL_SUBSCRIBERS_COUNT = "https://www.googleapis.com/youtube/v3/channels?part=statistics&key=" + GOOGLE_API_KEY + "&id="
