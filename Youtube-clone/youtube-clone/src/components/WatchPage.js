@@ -63,7 +63,7 @@ const WatchPage = () => {
         dispatch(closeSideNav());
         getVideoDetails();
         fetchSuggestions();
-    }, [])
+    }, [searchParams])
     return (
         <div className='mx-24 mt-20 flex-[6] flex gap-6'>
             <div className='flex-[70%] flex-col'>
