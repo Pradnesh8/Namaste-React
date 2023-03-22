@@ -41,7 +41,7 @@ const Navbar = () => {
         }
     }, [searchQuery])
     return (
-        <section className='navbar flex justify-between items-center fixed bg-white w-full'>
+        <section className='navbar flex justify-between items-center fixed bg-white w-full z-30'>
             <div className='logo-brand flex justify-start items-center gap-5 ml-4'>
                 <span className='hamburger cursor-pointer p-2 hover:bg-gray-100 hover:rounded-full' onClick={toggleNav}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
