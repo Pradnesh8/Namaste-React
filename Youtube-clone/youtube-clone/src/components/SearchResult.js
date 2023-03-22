@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { YOUTUBE_CHANNEL_IMG_API, YOUTUBE_VIDEO_LIST_SEARCH_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API } from '../utils/config';
-import { convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
+import { calculateDuration, convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import Shimmer from './Shimmer';
 
 const VideoItemCard = ({ info, content }) => {
 
-    const { statistics } = content ? content : {};
+    const { statistics, contentDetails } = content ? content : {};
+    const { duration } = contentDetails;
     const { snippet } = info;
     const { title, channelTitle, thumbnails, channelId, publishedAt, description } = snippet;
     const [channelImg, setChannelImg] = useState("");
@@ -21,10 +22,14 @@ const VideoItemCard = ({ info, content }) => {
 
     return (
         <div className='flex gap-3 cursor-pointer'>
-            <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-auto rounded-lg' />
+            <div className='relative min-w-max'>
+                <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-auto rounded-lg' />
+                {duration && <span className='absolute bottom-[2%] right-[2%] p-1 rounded-lg bg-black text-white text-xs font-semibold'>{calculateDuration(duration)}</span>}
+            </div>
+            {/* <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-auto rounded-lg' /> */}
             <div className='flex flex-col justify-start mt-1 items-start px-1'>
                 <span className='font-normal hide-overflow text-xl' title={title}>{title}</span>
-                <div className='flex gap-[1px]'>
+                <div className='flex gap-[1px] mt-1'>
                     <span className='flex text-xs'>
                         <span className='font-normal'>{convertToInternationalCurrencySystem(statistics?.viewCount)} views</span>
                         <span className="font-normal before:content-['•'] before:mx-1">{getTimeDifference(publishedAt)}</span>
