@@ -18,10 +18,25 @@ const VideoContainer = () => {
     return (
         <div className='mt-8 p-8 w-full flex flex-wrap justify-around overflow-x-hidden gap-4'>
             {
-                videos.map((video) =>
-                    <Link key={video.id} to={"watch?v=" + video.id}>
-                        <VideoCard info={video} />
-                    </Link>
+                videos.map((video, index) => {
+                    if (index === 0) {
+                        return (
+                            <Link key={video.id} to={"watchlive?v=" + video.id}>
+                                <div className='relative pb-2 rounded-b-lg shadow-xl shadow-red-200'>
+                                    <span title='Video for feature demo' className='bg-red-600 text-white px-3 py-1 absolute top-[2%] left-[0%] rounded-lg rounded-l-[0]'>Featured</span>
+                                    <VideoCard info={video} />
+                                </div>
+                            </Link>
+                        )
+                    } else {
+                        return (
+                            <Link key={video.id} to={"watch?v=" + video.id}>
+                                <VideoCard info={video} />
+                            </Link>
+                        )
+                    }
+                }
+
                 )
             }
         </div >
