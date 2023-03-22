@@ -3,20 +3,24 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom';
 import { YOUTUBE_VIDEO_DETAIL_BY_ID_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API, YOUTUBE_VIDEO_SUGGESTIONS_API } from '../utils/config';
-import { convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
+import { calculateDuration, convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import { closeSideNav } from '../utils/appSlice';
 import Comments from './Comments';
 import VideoDetail from './VideoDetail';
 
 
 const SuggestionVideoCard = ({ info, content }) => {
-    const { statistics } = content ? content : {};
+    const { statistics, contentDetails } = content ? content : {};
+    const { duration } = contentDetails;
     const { snippet } = info;
     const { title, channelTitle, thumbnails, publishedAt } = snippet;
 
     return (
         <div className='flex gap-2 cursor-pointer'>
-            <img src={thumbnails?.medium && thumbnails?.medium?.url !== "" ? thumbnails?.medium?.url : thumbnails?.default?.url} alt="thumbnail" className='w-[40%] rounded-lg' />
+            <div className='relative min-w-[40%] max-w-[40%]'>
+                <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-auto rounded-lg' />
+                {duration && <span className='absolute bottom-[2%] right-[2%] p-1 rounded-lg bg-black text-white text-xs font-semibold'>{calculateDuration(duration)}</span>}
+            </div>
             <div className='flex flex-col justify-start mt-1 items-start px-1'>
                 <span className='font-medium hide-overflow text-base' title={title}>{title}</span>
                 <div className='flex gap-2 items-center py-1'>
@@ -86,7 +90,7 @@ const WatchPage = () => {
                     )
                 }
             </div>
-            <div className='flex-[30%]'>
+            <div className='flex-[30%] mb-4'>
                 <div className='w-full flex flex-col gap-4'>
                     {
                         suggestions.map((video, index) => {
