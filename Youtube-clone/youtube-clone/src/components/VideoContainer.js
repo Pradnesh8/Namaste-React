@@ -23,7 +23,7 @@ const VideoContainer = () => {
                         return (
                             <Link key={video.id} to={"watchlive?v=" + video.id}>
                                 <div className='relative pb-2 rounded-b-lg shadow-xl shadow-red-200'>
-                                    <span title='Video for feature demo' className='bg-red-600 text-white px-3 py-1 absolute top-[2%] left-[0%] rounded-lg rounded-l-[0]'>Featured</span>
+                                    <span title='Video for feature demo' className='bg-red-600 z-10 text-white px-3 py-1 absolute top-[2%] left-[0%] rounded-lg rounded-l-[0]'>Featured</span>
                                     <VideoCard info={video} />
                                 </div>
                             </Link>

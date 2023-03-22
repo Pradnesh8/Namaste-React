@@ -77,3 +77,21 @@ export function generateRandomMessage() {
     const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
     return `The ${randomAdjective} ${randomNoun} likes to ${randomVerb} every day.`;
 }
+
+export function calculateDuration(timeString) {
+    const duration = timeString;
+
+    // Extract hours, minutes, and seconds from duration string
+    let match = duration.match(/PT((\d+)H)?((\d+)M)?((\d+)S)?/);
+    let hours = (match[2] !== undefined) ? match[2] : "00";
+    let minutes = (match[4] !== undefined) ? match[4] : "00";
+    let seconds = (match[6] !== undefined) ? match[6] : "00";
+
+    if (hours !== "00") {
+        return `${Number(hours) > 9 ? hours : "0" + hours}:${Number(minutes) > 9 ? minutes : "0" + minutes}:${Number(seconds) > 9 ? seconds : "0" + seconds}`;
+    } else if (minutes !== "00") {
+        return `${Number(minutes) > 9 ? minutes : "0" + minutes}:${Number(seconds) > 9 ? seconds : "0" + seconds}`;
+    } else {
+        return `${Number(seconds) > 9 ? seconds : "0" + seconds}`;
+    }
+}
