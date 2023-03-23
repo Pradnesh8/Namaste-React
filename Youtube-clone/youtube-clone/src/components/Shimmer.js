@@ -28,7 +28,7 @@ const Shimmer = ({ id }) => {
         <div className='mx-20 mt-24 mb-8 flex-[6] flex flex-col gap-5'>
             {
                 Array(20).fill("").map((item, index) => {
-                    return <div className='flex gap-3 cursor-pointer animate-pulse bg-slate-100 rounded-lg h-[30vh] w-full'>
+                    return <div key={crypto.randomUUID()} className='flex gap-3 cursor-pointer animate-pulse bg-slate-100 rounded-lg h-[30vh] w-full'>
                         <div className='w-[30%] rounded-lg animate-pulse bg-gray-200'></div>
                         <div className='flex flex-col w-[70%] gap-5 justify-start mt-1 m-2 items-start px-1 animate-pulse'>
                             <div className='w-[100%] mt-5 h-5 rounded-xl animate-pulse bg-gray-400'></div>
@@ -42,7 +42,7 @@ const Shimmer = ({ id }) => {
     );
     const searchNextPageShimmer = (
         Array(20).fill("").map((item, index) => {
-            return <div className='flex gap-3 cursor-pointer animate-pulse bg-slate-100 rounded-lg h-[30vh] w-full'>
+            return <div key={crypto.randomUUID()} className='flex gap-3 cursor-pointer animate-pulse bg-slate-100 rounded-lg h-[30vh] w-full'>
                 <div className='w-[30%] rounded-lg animate-pulse bg-gray-200'></div>
                 <div className='flex flex-col w-[70%] gap-5 justify-start mt-1 m-2 items-start px-1 animate-pulse'>
                     <div className='w-[100%] mt-5 h-5 rounded-xl animate-pulse bg-gray-400'></div>

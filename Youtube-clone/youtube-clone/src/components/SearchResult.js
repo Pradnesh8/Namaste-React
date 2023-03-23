@@ -114,10 +114,10 @@ const SearchResult = () => {
                 {videoList.map((video, index) => {
                     return (
                         videoList.length === index + 1 ?
-                            <Link ref={lastVideoCard} key={video?.id?.videoId} to={"/watch?v=" + video?.id?.videoId}>
+                            <Link ref={lastVideoCard} key={video?.id?.videoId + index} to={"/watch?v=" + video?.id?.videoId}>
                                 <VideoItemCard info={video} content={videoContentList[index]} />
                             </Link> :
-                            <Link key={video?.id?.videoId} to={"/watch?v=" + video?.id?.videoId}>
+                            <Link key={video?.id?.videoId + index} to={"/watch?v=" + video?.id?.videoId}>
                                 <VideoItemCard info={video} content={videoContentList[index]} />
                             </Link>
                     )
