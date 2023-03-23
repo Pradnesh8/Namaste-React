@@ -40,11 +40,25 @@ const Shimmer = ({ id }) => {
             }
         </div>
     );
+    const searchNextPageShimmer = (
+        Array(20).fill("").map((item, index) => {
+            return <div className='flex gap-3 cursor-pointer animate-pulse bg-slate-100 rounded-lg h-[30vh] w-full'>
+                <div className='w-[30%] rounded-lg animate-pulse bg-gray-200'></div>
+                <div className='flex flex-col w-[70%] gap-5 justify-start mt-1 m-2 items-start px-1 animate-pulse'>
+                    <div className='w-[100%] mt-5 h-5 rounded-xl animate-pulse bg-gray-400'></div>
+                    <div className='w-[80%] h-3 rounded-xl animate-pulse bg-gray-200'></div>
+                    <div className='w-[80%] h-3 rounded-xl animate-pulse bg-gray-200'></div>
+                </div>
+            </div>
+        })
+    );
     switch (id) {
         case "homePage":
             return homePageShimmer
         case "searchPage":
             return searchPageShimmer
+        case "searchNextPage":
+            return searchNextPageShimmer
     }
 
 }
