@@ -2,45 +2,45 @@ import React from 'react';
 import profilePhoto from '../assets/profile.jpg';
 const commentsData = [
     {
-        name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
+        name: "Jack Dry",
+        text: "Awesome work, Keep it up 🔥",
         replies: [],
     },
     {
-        name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
+        name: "Rock Styles",
+        text: "Come up with new such videos, waiting....",
         replies: [
             {
-                name: "Akshay Saini",
-                text: "Lorem ipsum dolor sit amet, consectetur adip",
+                name: "Tarun Xt",
+                text: "Yes hoping to see more content",
                 replies: [],
             },
             {
-                name: "Akshay Saini",
-                text: "Lorem ipsum dolor sit amet, consectetur adip",
+                name: "GSStt",
+                text: "Good work when next video is coming?",
                 replies: [
                     {
-                        name: "Akshay Saini",
-                        text: "Lorem ipsum dolor sit amet, consectetur adip",
+                        name: "Marko Pie",
+                        text: "Where is the twist?",
                         replies: [
                             {
-                                name: "Akshay Saini",
-                                text: "Lorem ipsum dolor sit amet, consectetur adip",
+                                name: "Kyle Sort",
+                                text: "Have you seen whole video?",
                                 replies: [
                                     {
-                                        name: "Akshay Saini",
-                                        text: "Lorem ipsum dolor sit amet, consectetur adip",
+                                        name: "Sickle DS",
+                                        text: "YES it is there in video",
                                         replies: [
                                             {
-                                                name: "Akshay Saini",
-                                                text: "Lorem ipsum dolor sit amet, consectetur adip",
+                                                name: "Georgia SS",
+                                                text: "Yes it a catch!",
                                                 replies: [],
                                             },
                                         ],
                                     },
                                     {
-                                        name: "Akshay Saini",
-                                        text: "Lorem ipsum dolor sit amet, consectetur adip",
+                                        name: "Sickle DS",
+                                        text: "Yeap definitely it is 😄",
                                         replies: [],
                                     },
                                 ],
@@ -52,22 +52,22 @@ const commentsData = [
         ],
     },
     {
-        name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
+        name: "Gamer ProX",
+        text: "Amazing content !!!!!!!",
+        replies: [],
+    },
+    {
+        name: "ShuknW",
+        text: "Good work",
         replies: [],
     },
     {
         name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
+        text: "Good Karma",
         replies: [],
     },
     {
-        name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
-        replies: [],
-    },
-    {
-        name: "Akshay Saini",
+        name: "NJ",
         text: "Lorem ipsum dolor sit amet, consectetur adip",
         replies: [],
     },
