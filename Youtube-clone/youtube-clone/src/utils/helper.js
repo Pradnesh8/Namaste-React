@@ -75,7 +75,7 @@ export function generateRandomMessage() {
     const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
     const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
-    return `The ${randomAdjective} ${randomNoun} likes to ${randomVerb} every day.`;
+    return `${randomAdjective} ${randomNoun} ${randomVerb}`;
 }
 
 export function calculateDuration(timeString) {
