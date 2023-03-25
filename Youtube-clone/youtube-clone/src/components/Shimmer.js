@@ -52,6 +52,17 @@ const Shimmer = ({ id }) => {
             </div>
         })
     );
+    const commentPageShimmer = (
+        Array(20).fill("").map((item, index) => {
+            return <div key={crypto.randomUUID()} className='flex gap-3 mt-5 animate-pulse'>
+                <div className='h-10 w-10 rounded-full bg-gray-200 animate-pulse'></div>
+                <div className="comment text-sm flex flex-col gap-1 w-[55vw] break-words bg-slate-100 p-2">
+                    <span className='name font-medium w-[10vw] h-2 rounded-lg bg-gray-200 animate-pulse'></span>
+                    <span className='text font-normal w-[40vw] h-2 rounded-lg bg-gray-200 animate-pulse'></span>
+                </div>
+            </div>
+        })
+    )
     switch (id) {
         case "homePage":
             return homePageShimmer
@@ -59,7 +70,10 @@ const Shimmer = ({ id }) => {
             return searchPageShimmer
         case "searchNextPage":
             return searchNextPageShimmer
+        case "commentPage":
+            return commentPageShimmer
     }
+
 
 }
 

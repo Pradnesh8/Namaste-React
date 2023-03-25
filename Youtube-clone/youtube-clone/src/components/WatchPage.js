@@ -5,8 +5,8 @@ import { useSearchParams } from 'react-router-dom';
 import { YOUTUBE_VIDEO_DETAIL_BY_ID_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API, YOUTUBE_VIDEO_SUGGESTIONS_API } from '../utils/config';
 import { calculateDuration, convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import { closeSideNav } from '../utils/appSlice';
-import Comments from './Comments';
 import VideoDetail from './VideoDetail';
+import Comments from './Comments';
 
 
 const SuggestionVideoCard = ({ info, content }) => {
@@ -85,7 +85,7 @@ const WatchPage = () => {
                     (
                         <>
                             <VideoDetail info={videoDetails} />
-                            <Comments views={videoDetails?.statistics?.commentCount} />
+                            <Comments commentCount={videoDetails?.statistics?.commentCount} videoId={videoDetails?.id} />
                         </>
                     )
                 }
