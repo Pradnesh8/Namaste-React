@@ -14,22 +14,6 @@ const Sidenav = () => {
             <div className='sub-section flex flex-col gap-1 border pb-3 border-b-gray-300 border-x-0 border-t-0'>
                 <div className='flex items-center gap-5 p-2 mx-3 cursor-pointer bg-gray-100 rounded-xl'>
                     <span className='icon'>
-                        {/* <svg
-                            className="w-6 h-6"
-                            display="block"
-                            pointerEvents="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <g className="style-scope yt-icon">
-                                <path
-                                    d="M12 4.33l7 6.12V20h-4v-6H9v6H5v-9.55l7-6.12M12 3l-8 7v11h6v-6h4v6h6V10l-8-7z"
-                                    className="style-scope yt-icon"
-                                ></path>
-                            </g>
-                        </svg> */}
-
-
-                        {/* Home filled */}
                         <svg
                             className="w-6 h-6"
                             display="block"

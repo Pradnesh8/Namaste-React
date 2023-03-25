@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { YOUTUBE_VIDEO_DETAIL_BY_ID_API, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API, YOUTUBE_VIDEO_SUGGESTIONS_API } from '../utils/config';
 import { calculateDuration, convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import { closeSideNav } from '../utils/appSlice';
-import Comments from './Comments';
+import NlevelComments from './NlevelComments';
 import VideoDetail from './VideoDetail';
 import LiveChat from './LiveChat';
 
@@ -87,7 +87,7 @@ const WatchLivePage = () => {
                     (
                         <>
                             <VideoDetail info={videoDetails} />
-                            <Comments views={videoDetails?.statistics?.commentCount} />
+                            <NlevelComments commentCount={videoDetails?.statistics?.commentCount} />
                         </>
                     )
                 }
