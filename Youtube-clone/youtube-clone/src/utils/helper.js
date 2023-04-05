@@ -83,9 +83,9 @@ export function calculateDuration(timeString) {
 
     // Extract hours, minutes, and seconds from duration string
     let match = duration.match(/PT((\d+)H)?((\d+)M)?((\d+)S)?/);
-    let hours = (match[2] !== undefined) ? match[2] : "00";
-    let minutes = (match[4] !== undefined) ? match[4] : "00";
-    let seconds = (match[6] !== undefined) ? match[6] : "00";
+    let hours = (match && match[2] !== undefined) ? match[2] : "00";
+    let minutes = (match && match[4] !== undefined) ? match[4] : "00";
+    let seconds = (match && match[6] !== undefined) ? match[6] : "00";
 
     if (hours !== "00") {
         return `${Number(hours) > 9 ? hours : "0" + hours}:${Number(minutes) > 9 ? minutes : "0" + minutes}:${Number(seconds) > 9 ? seconds : "0" + seconds}`;
