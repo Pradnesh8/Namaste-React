@@ -10,7 +10,7 @@ const Sidenav = () => {
     console.log("appcontext", appContext);
     if (!sideNav) return null;
     return (
-        <section className='sidenav flex-[1] sticky top-12 mt-12 text-sm px-1 flex flex-col pt-3 gap-3 max-h-[92vh] overflow-y-hidden hover:overflow-y-auto hover:scrollbar'>
+        <section className='hidden sidenav md:flex flex-[1] sticky top-12 mt-12 text-sm px-1 flex-col pt-3 gap-3 max-h-[92vh] overflow-y-hidden hover:overflow-y-auto hover:scrollbar'>
             <div className='sub-section flex flex-col gap-1 border pb-3 border-b-gray-300 border-x-0 border-t-0'>
                 <div className='flex items-center gap-5 p-2 mx-3 cursor-pointer bg-gray-100 rounded-xl'>
                     <span className='icon'>
