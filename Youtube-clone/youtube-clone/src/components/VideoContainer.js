@@ -45,7 +45,7 @@ const VideoContainer = () => {
         videos.length === 0 ? <Shimmer id={"homePage"} />
             :
             <>
-                <div className='mt-8 p-8 w-full flex flex-wrap justify-around overflow-x-hidden gap-4'>
+                <div className='mt-16 md:mt-8 md:p-8 w-full flex flex-wrap justify-around overflow-x-hidden gap-4'>
                     {
                         videos.map((video, index) => {
                             if (index === 0) {
