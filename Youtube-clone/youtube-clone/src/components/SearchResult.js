@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { YOUTUBE_CHANNEL_IMG_API, YOUTUBE_VIDEO_LIST_SEARCH_API, YOUTUBE_VIDEO_LIST_SEARCH_API_NEXT_PAGE, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API } from '../utils/config';
 import { calculateDuration, convertToInternationalCurrencySystem, getTimeDifference } from '../utils/helper';
 import Shimmer from './Shimmer';
+import VideoCard from './VideoCard';
 
 const VideoItemCard = ({ info, content }) => {
 
@@ -110,7 +111,7 @@ const SearchResult = () => {
     }
     return (
         <>
-            <div className='mx-20 mt-24 mb-8 flex-[6] flex flex-col gap-5'>
+            <div className='hidden md:flex mx-20 mt-24 mb-8 flex-[6] flex-col gap-5'>
                 {videoList.map((video, index) => {
                     return (
                         videoList.length === index + 1 ?
@@ -119,6 +120,21 @@ const SearchResult = () => {
                             </Link> :
                             <Link key={video?.id?.videoId + index} to={"/watch?v=" + video?.id?.videoId}>
                                 <VideoItemCard info={video} content={videoContentList[index]} />
+                            </Link>
+                    )
+                })}
+                {loading && <Shimmer id={"searchNextPage"} />}
+            </div>
+            {/* For Mobile */}
+            <div className='mt-16 mb-8 flex-[6] flex flex-col gap-5 items-center'>
+                {videoList.map((video, index) => {
+                    return (
+                        videoList.length === index + 1 ?
+                            <Link ref={lastVideoCard} key={video?.id?.videoId + index} to={"/watch?v=" + video?.id?.videoId}>
+                                <VideoCard info={{ ...video, ...videoContentList[index] }} />
+                            </Link> :
+                            <Link key={video?.id?.videoId + index} to={"/watch?v=" + video?.id?.videoId}>
+                                <VideoCard info={{ ...video, ...videoContentList[index] }} />
                             </Link>
                     )
                 })}
