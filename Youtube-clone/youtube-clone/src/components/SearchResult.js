@@ -111,6 +111,7 @@ const SearchResult = () => {
     }
     return (
         <>
+            {/* For Desktop */}
             <div className='hidden md:flex mx-20 mt-24 mb-8 flex-[6] flex-col gap-5'>
                 {videoList.map((video, index) => {
                     return (

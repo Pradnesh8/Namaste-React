@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSideNav } from '../utils/appSlice';
 import { GOOGLE_SEARCH_API } from '../utils/config'
 import { updateSearchCache } from '../utils/searchSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Navbar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [searchQuery, setSearchQuery] = useState("");
     const [openSearchMob, setOpenSearchMob] = useState(false);
     const [queryResults, setQueryResults] = useState([]);
@@ -42,21 +43,35 @@ const Navbar = () => {
         }
     }, [searchQuery])
     return (
+        console.log(location),
         <>
             {/* 
         TODO: responsiveness add ytb icon for mobile
         TODO: fix behavior of search after redirect
          */}
-            <section className='flex md:hidden navbar shadow-sm justify-between items-center fixed bg-white w-full z-30'>
+            {/* for Mobile */}
+            <section className={'flex md:hidden navbar shadow-sm justify-between items-center fixed bg-white w-full z-30 ' + (location.pathname === "/results" ? "py-2" : "")}>
                 {
                     openSearchMob ?
                         <div className='search-bar mt-1 w-full flex flex-wrap justify-center items-center relative'>
-                            <span className='px-1' onClick={() => {
-                                setSearchQuery("");
-                                setOpenSearchMob(false)
-                            }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path></svg>
-                            </span>
+                            {
+                                showQuery ?
+                                    <span className='px-1' onClick={() => {
+                                        setSearchQuery("");
+                                        setOpenSearchMob(false)
+                                    }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path></svg>
+                                    </span> :
+                                    <span onClick={() => {
+                                        setSearchQuery("");
+                                        setOpenSearchMob(false)
+                                        navigate("/")
+                                    }}>
+                                        <svg className='h-8 w-8 mx-2' viewBox="0 0 67 60" fill="">
+                                            <path fill='red' d="M63 14.87a7.885 7.885 0 00-5.56-5.56C52.54 8 32.88 8 32.88 8S13.23 8 8.32 9.31c-2.7.72-4.83 2.85-5.56 5.56C1.45 19.77 1.45 30 1.45 30s0 10.23 1.31 15.13c.72 2.7 2.85 4.83 5.56 5.56C13.23 52 32.88 52 32.88 52s19.66 0 24.56-1.31c2.7-.72 4.83-2.85 5.56-5.56C64.31 40.23 64.31 30 64.31 30s0-10.23-1.31-15.13z"></path>
+                                            <path fill="#FFF" class="logo-arrow" d="M26.6 39.43L42.93 30 26.6 20.57z"></path></svg>
+                                    </span>
+                            }
                             <span className='text-box'>
                                 <input type="text" name="search" onChange={(e) => setSearchQuery(e.target.value)} onFocus={() => setShowQuery(true)} onBlur={() => {
                                     setTimeout(() => {
@@ -117,6 +132,7 @@ const Navbar = () => {
                 }
 
             </section>
+            {/* for Desktop */}
             <section className='hidden md:flex navbar justify-between items-center fixed bg-white w-full z-30'>
                 <div className='logo-brand flex justify-start items-center gap-5 ml-4'>
                     <span className='hamburger cursor-pointer p-2 hover:bg-gray-100 hover:rounded-full' onClick={toggleNav}>
