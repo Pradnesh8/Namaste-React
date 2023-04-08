@@ -69,10 +69,10 @@ const WatchPage = () => {
         fetchSuggestions();
     }, [searchParams])
     return (
-        <div className='mx-24 mt-20 flex-[6] flex gap-6'>
-            <div className='flex-[70%] flex-col'>
+        <div className='flex-[6] flex flex-col w-full gap-6 md:mx-24 md:mt-20 md:flex-row'>
+            <div className='flex mt-16 w-full md:mt-0 md:flex-[70%] flex-col'>
                 <iframe
-                    className='w-full h-[74vh]'
+                    className='w-full h-[36vh] md:h-[74vh]'
                     src={"https://www.youtube.com/embed/" + searchParams.get("v") + "?autoplay=1"}
                     title="YouTube video player"
                     frameBorder="0"
@@ -90,7 +90,7 @@ const WatchPage = () => {
                     )
                 }
             </div>
-            <div className='flex-[30%] mb-4'>
+            <div className='md:flex-[30%] mb-4'>
                 <div className='w-full flex flex-col gap-4'>
                     {
                         suggestions.map((video, index) => {
