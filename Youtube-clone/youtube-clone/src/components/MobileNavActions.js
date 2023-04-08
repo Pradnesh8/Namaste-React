@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const MobileNavActions = () => {
+    const navigate = useNavigate();
     // const [showNav, setShowNav] = useState(true);
     // const stickNavbar = () => {
     //     if (window !== undefined) {
@@ -20,7 +22,7 @@ const MobileNavActions = () => {
     // }, [])
     return (
         <section className={'md:hidden foot-actions flex justify-around items-center bg-white py-2 fixed bottom-0 z-20 w-full'}>
-            <div className='flex flex-col mx-2 cursor-pointer justify-center items-center'>
+            <div onClick={() => navigate("/")} className='flex flex-col mx-2 cursor-pointer justify-center items-center'>
                 <span><svg enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" className='h-6 w-6' focusable="false"><g><path d="M4 21V10.08l8-6.96 8 6.96V21h-6v-6h-4v6H4z"></path></g></svg></span>
                 <span className='text-xs'>Home</span>
             </div>
