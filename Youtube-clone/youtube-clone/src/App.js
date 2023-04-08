@@ -5,6 +5,7 @@ import Body from './components/Body';
 import Navbar from './components/Navbar';
 import Sidenav from './components/Sidenav';
 import AppContext from './utils/AppContext';
+import MobileNavActions from './components/MobileNavActions';
 function App() {
   const appContext = useContext(AppContext);
   const [theme, setTheme] = useState(appContext.theme);
@@ -58,6 +59,7 @@ function App() {
           {/* <Body /> */}
         </div>
         <Navbar />
+        <MobileNavActions />
       </div>
     </AppContext.Provider>
   );
