@@ -47,7 +47,7 @@ const Navbar = () => {
         TODO: responsiveness add ytb icon for mobile
         TODO: fix behavior of search after redirect
          */}
-            <section className='flex md:hidden navbar justify-between items-center fixed bg-white w-full z-30'>
+            <section className='flex md:hidden navbar shadow-sm justify-between items-center fixed bg-white w-full z-30'>
                 {
                     openSearchMob ?
                         <div className='search-bar mt-1 w-full flex flex-wrap justify-center items-center relative'>
