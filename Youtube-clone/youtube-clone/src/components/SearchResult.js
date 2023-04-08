@@ -126,7 +126,7 @@ const SearchResult = () => {
                 {loading && <Shimmer id={"searchNextPage"} />}
             </div>
             {/* For Mobile */}
-            <div className='mt-16 mb-8 flex-[6] flex flex-col gap-5 items-center'>
+            <div className='md:hidden mt-16 mb-8 flex-[6] flex flex-col gap-5 items-center'>
                 {videoList.map((video, index) => {
                     return (
                         videoList.length === index + 1 ?
