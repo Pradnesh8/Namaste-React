@@ -56,7 +56,7 @@ const Navbar = () => {
             <section className={'flex md:hidden navbar shadow-sm justify-between items-center fixed bg-white w-full z-30 ' + (location.pathname === "/results" ? "py-2" : "")}>
                 {
                     openSearchMob ?
-                        <div className='search-bar mt-1 w-full flex flex-wrap justify-center items-center relative'>
+                        <div className='search-bar flex-nowrap mt-1 w-full flex md:flex-wrap justify-center items-center relative'>
                             {
                                 showQuery ?
                                     <span className='px-1' onClick={() => {

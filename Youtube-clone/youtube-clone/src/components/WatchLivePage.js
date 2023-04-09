@@ -87,7 +87,9 @@ const WatchLivePage = () => {
                     (
                         <>
                             <VideoDetail info={videoDetails} />
-                            <NlevelComments commentCount={videoDetails?.statistics?.commentCount} />
+                            <div className='hidden md:block'>
+                                <NlevelComments commentCount={videoDetails?.statistics?.commentCount} />
+                            </div>
                         </>
                     )
                 }
