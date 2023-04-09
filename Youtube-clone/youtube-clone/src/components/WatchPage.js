@@ -70,7 +70,7 @@ const WatchPage = () => {
     }, [searchParams])
     return (
         <div className='flex-[6] flex flex-col w-full gap-6 md:mx-24 md:mt-20 md:flex-row'>
-            <div className='flex mt-16 w-full md:mt-0 md:flex-[70%] flex-col'>
+            <div className='flex overflow-x-hidden mt-16 w-full md:mt-0 md:flex-[70%] flex-col'>
                 <iframe
                     className='w-full h-[36vh] md:h-[74vh]'
                     src={"https://www.youtube.com/embed/" + searchParams.get("v") + "?autoplay=1"}

@@ -6,6 +6,9 @@ const Comment = ({ data }) => {
     const { snippet } = data
     const { textDisplay, authorDisplayName, authorProfileImageUrl, likeCount } = snippet
     return (
+        // TODO : Responsivenes
+        // TODO : Toggle commentslist
+        // TODO : Add expansion for reply
         console.log("data in Comment", data),
         <div className='flex gap-3 mt-2'>
             <img src={authorProfileImageUrl} alt="profile" className='h-10 w-10 rounded-full' />
@@ -99,6 +102,7 @@ const CommentsList = ({ videoId }) => {
 }
 
 const Comments = ({ commentCount, videoId }) => {
+    const [viewComments, setViewComments] = useState(false);
     // const [commentsData, setCommentsData] = useState([]);
     // const [loading, setLoading] = useState(true);
 
@@ -116,10 +120,39 @@ const Comments = ({ commentCount, videoId }) => {
     // if (loading) return null
     return (
         <div className='mt-5'>
-            <div>
+            {/* Toggle Comments for Mobile */}
+            {
+                viewComments ?
+                    <div className='md:hidden'>
+                        <div className='flex justify-between border border-b-gray-200 p-2'>
+                            <span className='font-bold text-lg'>Comments</span>
+                            <span onClick={() => {
+                                console.log("Close")
+                                setViewComments(false);
+                            }}>✕</span>
+                        </div>
+                        <div className='h-[40vh] overflow-y-auto border border-b-gray-200 mb-3'>
+                            <CommentsList videoId={videoId} />
+                        </div>
+                    </div> :
+                    <div className='md:hidden flex cursor-pointer justify-between px-2'>
+                        <span>
+                            {formatter.format(commentCount)} Comments
+                        </span>
+                        <span onClick={() => {
+                            setViewComments(!viewComments);
+                        }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className='h-6 w-6' enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><path d="M12,21.7l-6.4-6.4l0.7-0.7l5.6,5.6l5.6-5.6l0.7,0.7L12,21.7z M18.4,8.6L12,2.3L5.6,8.6l0.7,0.7L12,3.7l5.6,5.6L18.4,8.6z"></path></svg>
+                        </span>
+                    </div>
+
+            }
+            {/* Desktop remove toggle */}
+            <div className='hidden md:block'>
                 {formatter.format(commentCount)} Comments
             </div>
-            <div className='mt-3'>
+            {/* Desktop commentsList */}
+            <div className='mt-3 hidden md:block'>
                 <CommentsList videoId={videoId} />
             </div>
         </div>
