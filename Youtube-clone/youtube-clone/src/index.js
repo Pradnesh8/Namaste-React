@@ -24,15 +24,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/results",
-        element: <SearchResult />
+        element: <SearchResult />,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/watch",
-        element: <WatchPage />
+        element: <WatchPage />,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/watchlive",
-        element: <WatchLivePage />
+        element: <WatchLivePage />,
+        errorElement: <ErrorPage />,
       }
     ]
   }
