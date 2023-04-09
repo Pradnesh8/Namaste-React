@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { YOUTUBE_COMMENTS_API } from '../utils/config';
 import Shimmer from './Shimmer';
-
+import parse from 'html-react-parser';
 const Comment = ({ data }) => {
     const { snippet } = data
     const { textDisplay, authorDisplayName, authorProfileImageUrl, likeCount } = snippet
@@ -12,9 +12,11 @@ const Comment = ({ data }) => {
         console.log("data in Comment", data),
         <div className='flex gap-3 mt-2'>
             <img src={authorProfileImageUrl} alt="profile" className='h-10 w-10 rounded-full' />
-            <div className="comment text-sm flex flex-col gap-1 w-[55vw] break-words">
+            <div className="comment w-full px-2 text-sm flex flex-col gap-1 md:w-[55vw] break-words">
                 <span className='name font-medium'>{authorDisplayName}</span>
-                <span className='text font-normal'>{textDisplay}</span>
+                <span className='text font-normal'>
+                    {parse(textDisplay)}
+                </span>
             </div>
         </div>
     )
@@ -30,6 +32,24 @@ const CommentReplyList = ({ commentInfo }) => {
     )
 }
 
+const CommentReplySection = ({ comment }) => {
+    const [showReply, setShowReply] = useState(false);
+    return (
+        <div className='flex flex-col gap-1'>
+            <div className='ml-14 mt-2 text-sm w-fit cursor-pointer px-2 py-1 rounded-3xl text-blue-600 bg-blue-100' onClick={() => setShowReply(!showReply)}>
+                {
+                    !showReply ? "▼ " : "▲ "
+                }
+                replies</div>
+            {
+                showReply &&
+                <div className='pl-5 border border-l-black border-r-0 border-t-0 border-b-0 ml-5'>
+                    <CommentReplyList commentInfo={comment.replies} />
+                </div>
+            }
+        </div>
+    )
+}
 const CommentsList = ({ videoId }) => {
     const observer = useRef();
     const [loading, setLoading] = useState(true);
@@ -78,9 +98,10 @@ const CommentsList = ({ videoId }) => {
                             <Comment data={comment?.snippet?.topLevelComment} />
                             {
                                 comment?.snippet?.totalReplyCount > 0 &&
-                                <div className='pl-5 border border-l-black border-r-0 border-t-0 border-b-0 ml-5'>
-                                    <CommentReplyList commentInfo={comment.replies} />
-                                </div>
+                                <CommentReplySection comment={comment} />
+                                // <div className='pl-5 border border-l-black border-r-0 border-t-0 border-b-0 ml-5'>
+                                //     <CommentReplyList commentInfo={comment.replies} />
+                                // </div>
                             }
                         </div>
                         :
@@ -88,9 +109,10 @@ const CommentsList = ({ videoId }) => {
                             <Comment data={comment?.snippet?.topLevelComment} />
                             {
                                 comment?.snippet?.totalReplyCount > 0 &&
-                                <div className='pl-5 border border-l-black border-r-0 border-t-0 border-b-0 ml-5'>
-                                    <CommentReplyList commentInfo={comment.replies} />
-                                </div>
+                                <CommentReplySection comment={comment} />
+                                // <div className='pl-5 border border-l-black border-r-0 border-t-0 border-b-0 ml-5'>
+                                //     <CommentReplyList commentInfo={comment.replies} />
+                                // </div>
                             }
                         </div>
                 )
