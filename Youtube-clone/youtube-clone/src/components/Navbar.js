@@ -42,6 +42,9 @@ const Navbar = () => {
             clearTimeout(t);
         }
     }, [searchQuery])
+    useEffect(() => {
+        if (location?.pathname === "/watch") setOpenSearchMob(false)
+    }, [location])
     return (
         console.log(location),
         <>
