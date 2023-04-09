@@ -87,11 +87,11 @@ const CommentsList = ({ videoId }) => {
         getCommentsData();
     }, [videoId]);
 
-    if (commentsData.length === 0) return <Shimmer id={"commentPage"} /> //show Shimmer
+    if (commentsData?.length === 0) return <Shimmer id={"commentPage"} /> //show Shimmer
     return (
         <>
 
-            {commentsData.map((comment, index) => {
+            {commentsData?.map((comment, index) => {
                 return (
                     commentsData.length === index + 1 ?
                         <div ref={lastComment} key={comment?.id} className="mt-4" >
@@ -148,12 +148,12 @@ const Comments = ({ commentCount, videoId }) => {
                     <div className='md:hidden'>
                         <div className='flex justify-between border border-b-gray-200 p-2'>
                             <span className='font-bold text-lg'>Comments</span>
-                            <span onClick={() => {
+                            <span className='cursor-pointer p-1' onClick={() => {
                                 console.log("Close")
                                 setViewComments(false);
                             }}>✕</span>
                         </div>
-                        <div className='h-[40vh] overflow-y-auto border border-b-gray-200 mb-3'>
+                        <div className='h-[40vh] overflow-x-hidden overflow-y-auto border border-b-gray-200 mb-3'>
                             <CommentsList videoId={videoId} />
                         </div>
                     </div> :

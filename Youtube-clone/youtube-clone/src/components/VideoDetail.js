@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { YOUTUBE_CHANNEL_IMG_API, YOUTUBE_CHANNEL_SUBSCRIBERS_COUNT } from '../utils/config';
 import { convertToInternationalCurrencySystem, formattedDate } from '../utils/helper';
-
+import parse from 'html-react-parser';
 const VideoDetail = ({ info }) => {
     const [showMore, setShowMore] = useState(false);
     const [channelSubInfo, setChannelSubInfo] = useState({});
@@ -109,7 +109,7 @@ const VideoDetail = ({ info }) => {
                     </div>
                     <div className={"description text-sm flex flex-col gap-1"}>
                         <div className={!showMore && "hide-overflow"}>
-                            {description}
+                            {parse(description)}
                         </div>
                         <div className='font-semibold cursor-pointer' onClick={() => { setShowMore(!showMore) }}>Show {!showMore ? "more" : "less"}</div>
                     </div>
@@ -190,7 +190,7 @@ const VideoDetail = ({ info }) => {
                     </div>
                     <div className={"description text-sm flex flex-col gap-1"}>
                         <div className={!showMore && "hide-overflow"}>
-                            {description}
+                            {parse(description)}
                         </div>
                         <div className='font-semibold cursor-pointer' onClick={() => { setShowMore(!showMore) }}>Show {!showMore ? "more" : "less"}</div>
                     </div>
