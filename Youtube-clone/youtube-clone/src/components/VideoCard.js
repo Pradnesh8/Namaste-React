@@ -16,13 +16,13 @@ const VideoCard = ({ info }) => {
         getChannelImg();
     }, [])
     return (
-        <div className='flex flex-col min-w-fit h-auto gap-1 cursor-pointer'>
+        <div className='flex flex-col w-[100vw] md:min-w-fit h-auto gap-1 cursor-pointer'>
             {console.log("thumbnails", JSON.stringify(thumbnails, duration))}
             <div className='relative'>
-                <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-96 rounded-lg' />
+                <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-[100vw] md:w-96 rounded-lg' />
                 {duration && <span className='absolute bottom-[2%] right-[2%] p-1 rounded-lg bg-black text-white text-xs font-semibold'>{calculateDuration(duration)}</span>}
             </div>
-            <div className='flex justify-start mt-1 items-start w-96 px-1'>
+            <div className='flex justify-start mt-1 items-start w-[100vw] md:w-96 px-1'>
                 <img src={channelImg} alt="channel-image" className='w-8 h-8 mt-1 mr-3 rounded-full' />
                 <div className='flex flex-col gap-[1px]'>
                     <span className='font-semibold hide-overflow' title={title}>{title}</span>
