@@ -16,7 +16,7 @@ const VideoCard = ({ info }) => {
         getChannelImg();
     }, [])
     return (
-        <div className='flex flex-col w-[100vw] md:min-w-fit h-auto gap-1 cursor-pointer'>
+        <div className='flex flex-col w-[100vw] md:w-fit h-auto gap-1 cursor-pointer'>
             {console.log("thumbnails", JSON.stringify(thumbnails, duration))}
             <div className='relative'>
                 <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-[100vw] md:w-96 rounded-lg' />
