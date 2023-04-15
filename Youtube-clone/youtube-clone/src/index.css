@@ -30,4 +30,7 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
   }
+  .disable-scrollbars::-webkit-scrollbar {
+    display: none;
+  }
 }
