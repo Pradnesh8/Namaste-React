@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom'
 import { YOUTUBE_VIDEOS_API, YOUTUBE_VIDEOS_API_NEXT_PAGE } from '../utils/config'
 import Shimmer from './Shimmer'
 import VideoCard from './VideoCard'
+import { useSelector } from 'react-redux'
 
 const VideoContainer = () => {
     const [videos, setVideos] = useState([]);
     const observer = useRef();
     const [loading, setLoading] = useState(true);
     const [nextPageToken, setNextPageToken] = useState("");
+    const videoCategory = useSelector(store => store.app.selectedCategory);
 
+    // TODO: Fetch videos by category
+    // ==> Separate logic using if videoCategory==="all"
+    // ==> Refer SearchResult
     const fetchVideos = async () => {
         setLoading(true);
         const data = await fetch(YOUTUBE_VIDEOS_API);
@@ -38,8 +43,9 @@ const VideoContainer = () => {
         if (node) observer.current.observe(node)
     })
     useEffect(() => {
+        console.log("category", videoCategory);
         fetchVideos();
-    }, [])
+    }, [videoCategory])
 
     return (
         videos.length === 0 ? <Shimmer id={"homePage"} />

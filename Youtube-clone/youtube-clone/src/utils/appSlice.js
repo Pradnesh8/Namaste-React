@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const AppSlice = createSlice({
     name: "app",
     initialState: {
-        sideNav: true
+        sideNav: true,
+        selectedCategory: "all"
     },
     reducers: {
         toggleSideNav: (state) => {
@@ -11,9 +12,12 @@ const AppSlice = createSlice({
         },
         closeSideNav: (state) => {
             state.sideNav = false;
+        },
+        changeCategory: (state, action) => {
+            state.selectedCategory = action.payload;
         }
     }
 })
 
-export const { toggleSideNav, closeSideNav } = AppSlice.actions;
+export const { toggleSideNav, closeSideNav, changeCategory } = AppSlice.actions;
 export default AppSlice.reducer;

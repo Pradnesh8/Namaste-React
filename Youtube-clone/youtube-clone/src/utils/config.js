@@ -15,3 +15,4 @@ export const YOUTUBE_VIDEO_DETAIL_BY_ID_API = "https://www.googleapis.com/youtub
 export const OFFSET_LIVE_MESSAGE_COUNT = 30
 export const YOUTUBE_CHANNEL_SUBSCRIBERS_COUNT = "https://www.googleapis.com/youtube/v3/channels?part=statistics&key=" + GOOGLE_API_KEY + "&id="
 export const YOUTUBE_COMMENTS_API = "https://www.googleapis.com/youtube/v3/commentThreads?key=" + GOOGLE_API_KEY + "&part=snippet,replies&videoId="
+export const YOUTUBE_CATEGORY_LIST = "https://youtube.googleapis.com/youtube/v3/videoCategories?regionCode=IN&key=" + GOOGLE_API_KEY

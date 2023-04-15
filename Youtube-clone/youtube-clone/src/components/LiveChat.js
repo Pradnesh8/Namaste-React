@@ -8,7 +8,7 @@ const LiveChat = () => {
     const [liveMessage, setLiveMessage] = useState("");
     const [showLiveChat, setShowLiveChat] = useState(false);
     const dispatch = useDispatch();
-    const liveMessages = useSelector((store) => store.chat.messages)
+    const liveMessages = useSelector(store => store.chat.messages)
     useEffect(() => {
         //API polling
         const i = setInterval(() => {
