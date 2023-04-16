@@ -26,7 +26,7 @@ const Navbar = () => {
             console.log("from cache");
             setQueryResults(searchCache[searchQuery]);
         } else {
-            const data = await fetch(GOOGLE_SEARCH_API + searchQuery);
+            const data = await fetch(GOOGLE_SEARCH_API + searchQuery, { method: 'GET' });
             const json = await data.json();
             console.log("search result", json);
             dispatch(updateSearchCache(json));
