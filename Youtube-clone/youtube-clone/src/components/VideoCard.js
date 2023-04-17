@@ -17,7 +17,6 @@ const VideoCard = ({ info }) => {
     }, [])
     return (
         <div className='flex flex-col w-[100vw] md:w-fit h-auto gap-1 cursor-pointer'>
-            {console.log("thumbnails", JSON.stringify(thumbnails, duration))}
             <div className='relative'>
                 <img src={thumbnails?.maxres && thumbnails?.maxres?.url !== "" ? thumbnails?.maxres?.url : thumbnails?.medium?.url} alt="thumbnail" className='w-[100vw] md:w-96 rounded-lg' />
                 {duration && <span className='absolute bottom-[2%] right-[2%] p-1 rounded-lg bg-black text-white text-xs font-semibold'>{calculateDuration(duration)}</span>}

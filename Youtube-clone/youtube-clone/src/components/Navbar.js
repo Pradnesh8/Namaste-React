@@ -16,19 +16,16 @@ const Navbar = () => {
     const searchCache = useSelector(store => store.search.searchCache);
     const dispatch = useDispatch();
     const toggleNav = () => {
-        console.log("Toggle")
         dispatch(toggleSideNav());
     }
 
 
     const searchQueryItems = async () => {
         if (searchCache[searchQuery]) {
-            console.log("from cache");
             setQueryResults(searchCache[searchQuery]);
         } else {
             const data = await fetch(GOOGLE_SEARCH_API + searchQuery, { method: 'GET' });
             const json = await data.json();
-            console.log("search result", json);
             dispatch(updateSearchCache(json));
             setQueryResults(json[1]);
         }
@@ -46,7 +43,6 @@ const Navbar = () => {
         if (location?.pathname === "/watch") setOpenSearchMob(false)
     }, [location])
     return (
-        console.log(location),
         <>
             {/* 
         TODO: responsiveness add ytb icon for mobile

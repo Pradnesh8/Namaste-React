@@ -6,10 +6,6 @@ const Comment = ({ data }) => {
     const { snippet } = data
     const { textDisplay, authorDisplayName, authorProfileImageUrl, likeCount } = snippet
     return (
-        // TODO : Responsivenes
-        // TODO : Toggle commentslist
-        // TODO : Add expansion for reply
-        console.log("data in Comment", data),
         <div className='flex gap-3 mt-2'>
             <img src={authorProfileImageUrl} alt="profile" className='h-10 w-10 rounded-full' />
             <div className="comment w-full px-2 text-sm flex flex-col gap-1 md:w-[55vw] break-words">
@@ -25,7 +21,6 @@ const Comment = ({ data }) => {
 const CommentReplyList = ({ commentInfo }) => {
     const { comments } = commentInfo;
     return (
-        console.log("data in CommentReplyList", commentInfo),
         comments.map((comment) =>
             <Comment data={comment} key={comment?.id} />
         )
@@ -149,7 +144,6 @@ const Comments = ({ commentCount, videoId }) => {
                         <div className='flex justify-between border border-b-gray-200 p-2'>
                             <span className='font-bold text-lg'>Comments</span>
                             <span className='cursor-pointer p-1' onClick={() => {
-                                console.log("Close")
                                 setViewComments(false);
                             }}>✕</span>
                         </div>

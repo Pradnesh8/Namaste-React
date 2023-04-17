@@ -4,10 +4,8 @@ import AppContext from '../utils/AppContext';
 
 const Sidenav = () => {
     const sideNav = useSelector(store => store.app.sideNav);
-    console.log("sideNav", sideNav);
     // For toggling theme
     const appContext = useContext(AppContext);
-    console.log("appcontext", appContext);
     if (!sideNav) return null;
     return (
         <section className='hidden sidenav md:flex flex-[1] sticky top-12 mt-12 text-sm px-1 flex-col pt-3 gap-3 max-h-[92vh] overflow-y-hidden hover:overflow-y-auto hover:scrollbar'>

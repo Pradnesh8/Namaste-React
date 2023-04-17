@@ -49,7 +49,6 @@ const WatchLivePage = () => {
     const getVideoDetails = async () => {
         const data = await fetch(YOUTUBE_VIDEO_DETAIL_BY_ID_API + searchParams.get("v"));
         const json = await data.json();
-        console.log("jsondata", json);
         setVideoDetails(json.items[0]);
     }
 

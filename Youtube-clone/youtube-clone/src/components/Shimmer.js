@@ -24,7 +24,6 @@ const Shimmer = ({ id }) => {
         </div >
     )
     const searchPageShimmer = (
-        console.log("inside"),
         <div className='mx-20 mt-24 mb-8 flex-[6] flex flex-col gap-5'>
             {
                 Array(20).fill("").map((item, index) => {
