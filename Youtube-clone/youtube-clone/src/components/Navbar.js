@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import logo from '../assets/ytb-logo.png';
 import profilePhoto from '../assets/profile.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSideNav } from '../utils/appSlice';
+import { changeCategory, toggleSideNav } from '../utils/appSlice';
 import { GOOGLE_SEARCH_API } from '../utils/config'
 import { updateSearchCache } from '../utils/searchSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -44,10 +44,6 @@ const Navbar = () => {
     }, [location])
     return (
         <>
-            {/* 
-        TODO: responsiveness add ytb icon for mobile
-        TODO: fix behavior of search after redirect
-         */}
             {/* for Mobile */}
             <section className={'flex md:hidden navbar shadow-sm justify-between items-center fixed bg-white w-full z-30 ' + (location.pathname === "/results" ? "py-2" : "")}>
                 {
@@ -113,7 +109,10 @@ const Navbar = () => {
                         :
                         <>
                             <div className='logo-brand flex justify-start items-center ml-4'>
-                                <img src={logo} alt="YouTube logo" className='w-24 h-auto cursor-pointer' onClick={() => navigate("/")} />
+                                <img src={logo} alt="YouTube logo" className='w-24 h-auto cursor-pointer' onClick={() => {
+                                    dispatch(changeCategory('all'));
+                                    navigate("/");
+                                }} />
                             </div>
                             <div className='flex gap-1 items-center'>
                                 <button className='p-2 rounded-full cursor-pointer' onClick={() => {
@@ -139,7 +138,10 @@ const Navbar = () => {
                             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
                         </svg>
                     </span>
-                    <img src={logo} alt="YouTube logo" className='w-24 h-auto cursor-pointer' onClick={() => navigate("/")} />
+                    <img src={logo} alt="YouTube logo" className='w-24 h-auto cursor-pointer' onClick={() => {
+                        dispatch(changeCategory('all'));
+                        navigate("/");
+                    }} />
                 </div>
                 <div className='search-bar flex flex-wrap justify-center items-center relative'>
                     <span className='text-box'>
