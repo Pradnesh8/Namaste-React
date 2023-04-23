@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom'
 import { YOUTUBE_VIDEOS_API, YOUTUBE_VIDEOS_API_NEXT_PAGE, YOUTUBE_VIDEO_LIST_BY_CATEGORY_API, YOUTUBE_VIDEO_LIST_SEARCH_API, YOUTUBE_VIDEO_LIST_SEARCH_API_NEXT_PAGE, YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API } from '../utils/config'
 import Shimmer from './Shimmer'
 import VideoCard from './VideoCard'
-import { useSelector } from 'react-redux'
 
-const VideoContainer = () => {
+const VideoContainer = ({ category }) => {
     const [videos, setVideos] = useState([]);
     const observer = useRef();
     const [loading, setLoading] = useState(true);
     const [nextPageToken, setNextPageToken] = useState("");
-    const videoCategoryMain = useSelector(store => store.app.selectedCategory);
-    const [videoCategoryLocal, setVideoCategoryLocal] = useState("");
+    // const videoCategoryMain = useSelector(store => store.app.selectedCategory);
+    const [videoCategoryLocal, setVideoCategoryLocal] = useState(category);
     const [videoList, setVideoList] = useState([]);
     const [videoContentList, setVideoContentList] = useState([]);
     // TODO: Fetch videos by category
@@ -19,11 +18,12 @@ const VideoContainer = () => {
     // ==> Refer SearchResult
     const fetchVideosBySearch = async () => {
         setLoading(true);
-        const data = await fetch(YOUTUBE_VIDEO_LIST_BY_CATEGORY_API + videoCategoryLocal);
+        const data = await fetch(YOUTUBE_VIDEO_LIST_BY_CATEGORY_API + category);
         const json = await data.json();
         const videoIds = []
-        json.items.forEach((item) => {
+        json.items.forEach((item, i) => {
             videoIds.push(item.id.videoId);
+            json.items[i]["id"] = item.id.videoId;
         });
         const data2 = await fetch(YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API + String(videoIds));
         const json2 = await data2.json();
@@ -36,11 +36,12 @@ const VideoContainer = () => {
     }
     const fetchNextPageVideosBySearch = async (pageToken) => {
         setLoading(true)
-        const data = await fetch(YOUTUBE_VIDEO_LIST_BY_CATEGORY_API + videoCategoryLocal + "&pageToken=" + pageToken);
+        const data = await fetch(YOUTUBE_VIDEO_LIST_BY_CATEGORY_API + category + "&pageToken=" + pageToken);
         const json = await data.json();
         const videoIds = []
-        json.items.forEach((item) => {
+        json.items.forEach((item, i) => {
             videoIds.push(item.id.videoId);
+            json.items[i]["id"] = item.id.videoId;
         });
         const data2 = await fetch(YOUTUBE_VIDEO_LIST_SEARCH_CONTENT_API + String(videoIds));
         const json2 = await data2.json();
@@ -51,8 +52,7 @@ const VideoContainer = () => {
     }
 
     const fetchVideos = async () => {
-        if (videoCategoryMain !== "all") {
-            // setVideoCategoryLocal(videoCategoryLocal);
+        if (category !== "all") {
             fetchVideosBySearch();
         } else {
             // setVideoCategoryLocal(videoCategoryLocal);
@@ -63,6 +63,7 @@ const VideoContainer = () => {
             setNextPageToken(json?.nextPageToken);
             setLoading(false);
         }
+        setVideoCategoryLocal(category);
     }
     const fetchNextPageVideos = async (pageToken) => {
         setLoading(true);
@@ -88,25 +89,19 @@ const VideoContainer = () => {
         if (node) observer.current.observe(node)
     })
     useEffect(() => {
-        // setVideos([]);
-        // setNextPageToken("");
-        setVideoCategoryLocal(videoCategoryMain);
-        // fetchVideos();
-    }, [videoCategoryMain])
-    useEffect(() => {
         setVideos([]);
-        setVideoContentList([]);
         setNextPageToken("");
+        setVideoContentList([]);
         console.log("changed", videoCategoryLocal);
-        // setVideoCategoryLocal(videoCategoryMain);
+        console.log("changed in child", category);
         fetchVideos();
-    }, [videoCategoryLocal])
+    }, [category])
 
     // TODO: Watch url is not generating properly
 
 
     return (
-        videos?.length === 0 ? <Shimmer id={"homePage"} />
+        videos?.length === 0 || videoCategoryLocal !== category ? <Shimmer id={"homePage"} />
             :
             <>
                 <div className='mt-16 md:mt-8 md:p-8 w-full flex flex-wrap justify-around overflow-x-hidden gap-4'>
@@ -114,7 +109,8 @@ const VideoContainer = () => {
                         videos?.map((video, index) => {
                             if (index === 0) {
                                 return (
-                                    <Link key={video?.id + video?.etag} to={"watchlive?v=" + video.id}>
+                                    console.log("video id : ", JSON.stringify(video)),
+                                    <Link key={video?.id + video?.etag} to={"watchlive?v=" + video?.id}>
                                         <div className='relative pb-2 rounded-b-lg shadow-[#fecaca_0px_5px_15px]'>
                                             <span title='Video for feature demo' className='bg-red-600 z-10 text-white px-3 py-1 absolute top-[2%] left-[0%] rounded-lg rounded-l-[0]'>Featured</span>
                                             {console.log("merged", { ...video, ...videoContentList[index] }, videoCategoryLocal)}
@@ -129,8 +125,9 @@ const VideoContainer = () => {
                                 )
                             } else {
                                 return (
+                                    console.log("video id : ", JSON.stringify(video)),
                                     videos.length === index + 1 ?
-                                        <Link ref={lastVideoCard} key={video?.id + video?.etag} to={"watch?v=" + video.id}>
+                                        <Link ref={lastVideoCard} key={video?.id + video?.etag} to={"watch?v=" + video?.id} >
                                             {console.log("merged", { ...video, ...videoContentList[index] }, videoCategoryLocal)}
                                             {
                                                 videoCategoryLocal !== "all" ?
@@ -138,7 +135,7 @@ const VideoContainer = () => {
                                                     <VideoCard info={video} />
                                             }
                                         </Link> :
-                                        <Link key={video?.id + video?.etag} to={"watch?v=" + video.id}>
+                                        <Link key={video?.id + video?.etag} to={"watch?v=" + video?.id}>
                                             {console.log("merged", { ...video, ...videoContentList[index] }, videoCategoryLocal)}
                                             {
                                                 videoCategoryLocal !== "all" ?
@@ -150,8 +147,9 @@ const VideoContainer = () => {
                             }
                         })
                     }
-                </div>
-                {loading && <Shimmer id={"homePage"} />}
+                </div >
+                {loading && <Shimmer id={"homePage"} />
+                }
             </>
     )
 }
